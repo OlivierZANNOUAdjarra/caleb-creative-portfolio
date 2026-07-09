@@ -101,6 +101,16 @@ export const translations = {
         },
       ],
     },
+    contact: {
+      badge: 'Contact',
+      title: 'Parlons de votre projet.',
+      formName: 'Nom',
+      formEmail: 'Email',
+      formMessage: 'Message',
+      submit: 'Envoyer le message',
+      sending: 'Envoi en cours...',
+      locationLabel: 'Abomey – Bénin',
+    },
   },
   en: {
     nav: {
@@ -200,7 +210,18 @@ export const translations = {
         },
       ],
     },
+    contact: {
+      badge: 'Contact',
+      title: "Let's talk about your project.",
+      formName: 'Name',
+      formEmail: 'Email',
+      formMessage: 'Message',
+      submit: 'Send message',
+      sending: 'Sending...',
+      locationLabel: 'Abomey – Benin',
+    },
   },
 } as const;
 
 export type Lang = keyof typeof translations;
+         
