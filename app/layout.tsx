@@ -1,6 +1,9 @@
 import type { Metadata } from 'next';
 import { Space_Grotesk, Inter } from 'next/font/google';
 import './globals.css';
+import { ThemeProvider } from '@/lib/theme-context';
+import { LanguageProvider } from '@/lib/language-context';
+import SiteControls from '@/components/SiteControls';
 
 const display = Space_Grotesk({
   subsets: ['latin'],
@@ -72,13 +75,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="fr" className={`${display.variable} ${body.variable}`}>
-      <body className="relative min-h-screen overflow-x-hidden font-body">
-        <div
-          aria-hidden
-          className="pointer-events-none fixed inset-0 -z-10 bg-aurora-gradient"
-        />
-        {children}
+    <html lang="fr" className={`${display.variable} ${body.variable}`} suppressHydrationWarning>
+      <body className="relative min-h-screen overflow-x-hidden bg-paper font-body text-ink transition-colors dark:bg-paper-dark dark:text-paper">
+        <ThemeProvider>
+          <LanguageProvider>
+            <div
+              aria-hidden
+              className="pointer-events-none fixed inset-0 -z-10 bg-aurora-gradient"
+            />
+            <SiteControls />
+            {children}
+          </LanguageProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
