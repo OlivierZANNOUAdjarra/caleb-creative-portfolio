@@ -1,0 +1,150 @@
+'use client';
+
+import { useState, useTransition } from 'react';
+import { motion } from 'framer-motion';
+import { Mail, Phone, MapPin, Facebook, Send, CheckCircle2 } from 'lucide-react';
+import { sendContactMessage } from '@/app/actions/contact';
+
+const contactInfo = [
+  { icon: Mail, label: 'calebagbakou@gmail.com', href: 'mailto:calebagbakou@gmail.com' },
+  { icon: Phone, label: '+229 01 48 13 53 95 (WhatsApp)', href: 'https://wa.me/22901481395395' },
+  { icon: Phone, label: '+229 01 50 25 97 92', href: 'tel:+22901502597092' },
+  { icon: Phone, label: '+229 01 95 93 86 00', href: 'tel:+22901959386000' },
+  { icon: MapPin, label: 'Abomey – Bénin', href: undefined },
+];
+
+export default function ContactSection() {
+  const [isPending, startTransition] = useTransition();
+  const [result, setResult] = useState<{ success: boolean; message: string } | null>(null);
+
+  function handleSubmit(formData: FormData) {
+    startTransition(async () => {
+      const res = await sendContactMessage(formData);
+      setResult(res);
+    });
+  }
+
+  return (
+    <section id="contact" className="relative mx-auto max-w-5xl px-6 py-24 sm:px-10">
+      <p className="inline-flex items-center gap-2 font-display text-xs font-medium uppercase tracking-[0.2em] text-electric">
+        <Send className="h-3.5 w-3.5" />
+        Contact
+      </p>
+
+      <h2 className="mt-4 max-w-2xl font-display text-2xl font-semibold text-balance text-ink sm:text-3xl lg:text-4xl">
+        Parlons de votre projet.
+      </h2>
+
+      <div className="mt-12 grid gap-10 lg:grid-cols-2 lg:gap-16">
+        {/* Infos de contact */}
+        <div className="space-y-4">
+          {contactInfo.map((item) => {
+            const Icon = item.icon;
+            const content = (
+              <div className="flex items-center gap-3 rounded-xl2 border border-ink/10 bg-white/60 px-4 py-3.5 text-sm text-ink/80 backdrop-blur-sm transition-colors hover:border-electric/30 hover:text-electric">
+                <Icon className="h-4 w-4 shrink-0 text-electric" />
+                {item.label}
+              </div>
+            );
+            return item.href ? (
+              <a key={item.label} href={item.href} target="_blank" rel="noopener noreferrer">
+                {content}
+              </a>
+            ) : (
+              <div key={item.label}>{content}</div>
+            );
+          })}
+
+          <a
+            href="https://facebook.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-3 rounded-xl2 border border-ink/10 bg-white/60 px-4 py-3.5 text-sm text-ink/80 backdrop-blur-sm transition-colors hover:border-electric/30 hover:text-electric"
+          >
+            <Facebook className="h-4 w-4 shrink-0 text-electric" />
+            Caleb Agk — Facebook &amp; TikTok
+          </a>
+        </div>
+
+        {/* Formulaire */}
+        <motion.form
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6 }}
+          action={handleSubmit}
+          className="space-y-4 rounded-xl2 border border-ink/10 bg-white/60 p-6 backdrop-blur-sm"
+        >
+          {/* Champ piège anti-spam, caché visuellement */}
+          <input
+            type="text"
+            name="company"
+            tabIndex={-1}
+            autoComplete="off"
+            className="absolute -left-[9999px]"
+            aria-hidden="true"
+          />
+
+          <div>
+            <label htmlFor="name" className="mb-1.5 block text-sm font-medium text-ink">
+              Nom
+            </label>
+            <input
+              id="name"
+              name="name"
+              type="text"
+              required
+              className="w-full rounded-lg border border-ink/15 bg-white px-4 py-2.5 text-sm text-ink outline-none transition-colors focus:border-electric"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="email" className="mb-1.5 block text-sm font-medium text-ink">
+              Email
+            </label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              required
+              className="w-full rounded-lg border border-ink/15 bg-white px-4 py-2.5 text-sm text-ink outline-none transition-colors focus:border-electric"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="message" className="mb-1.5 block text-sm font-medium text-ink">
+              Message
+            </label>
+            <textarea
+              id="message"
+              name="message"
+              required
+              rows={4}
+              className="w-full resize-none rounded-lg border border-ink/15 bg-white px-4 py-2.5 text-sm text-ink outline-none transition-colors focus:border-electric"
+            />
+          </div>
+
+          <button
+            type="submit"
+            disabled={isPending}
+            className="flex w-full items-center justify-center gap-2 rounded-full bg-ink px-6 py-3.5 text-sm font-medium text-paper transition-transform hover:-translate-y-0.5 disabled:opacity-60"
+          >
+            {isPending ? 'Envoi en cours...' : 'Envoyer le message'}
+            <Send className="h-4 w-4" />
+          </button>
+
+          {result && (
+            <p
+              className={`flex items-center gap-2 text-sm ${
+                result.success ? 'text-emerald-600' : 'text-red-600'
+              }`}
+            >
+              {result.success && <CheckCircle2 className="h-4 w-4" />}
+              {result.message}
+            </p>
+          )}
+        </motion.form>
+      </div>
+    </section>
+  );
+      }
