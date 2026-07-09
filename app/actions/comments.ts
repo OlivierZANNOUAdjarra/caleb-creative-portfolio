@@ -1,92 +1,46 @@
 'use server';
 
-import { sql } from '@/lib/db';
-import { revalidatePath } from 'next/cache';
-import { cookies } from 'next/headers';
-import { verifySessionToken } from '@/lib/auth';
+import { Resend } from 'resend';
 
-export type Comment = {
-  id: number;
-  name: string;
-  message: string;
-  approved: boolean;
-  created_at: string;
-};
+const resend = new Resend(process.env.RESEND_API_KEY);
 
-function assertAdmin() {
-  const token = cookies().get('cc_session')?.value;
-  if (!verifySessionToken(token)) {
-    throw new Error('Non autorisé.');
-  }
-}
+type ContactResult = { success: boolean; message: string };
 
-export async function getApprovedComments(): Promise<Comment[]> {
-  const rows = await sql`
-    SELECT id, name, message, approved, created_at
-    FROM comments
-    WHERE approved = TRUE
-    ORDER BY created_at DESC
-    LIMIT 20
-  `;
-  return rows as Comment[];
-}
-
-export async function submitComment(
+export async function sendContactMessage(
   formData: FormData
-): Promise<{ success: boolean; message: string }> {
+): Promise<ContactResult> {
   const name = String(formData.get('name') || '').trim();
+  const email = String(formData.get('email') || '').trim();
   const message = String(formData.get('message') || '').trim();
 
+  // Protection anti-spam basique : champ "piège" invisible pour les humains
   const honeypot = String(formData.get('company') || '').trim();
   if (honeypot) {
-    return { success: true, message: 'Merci pour votre commentaire.' };
+    return { success: true, message: 'Message envoyé.' };
   }
 
-  if (!name || !message) {
+  if (!name || !email || !message) {
     return { success: false, message: 'Merci de remplir tous les champs.' };
   }
 
-  if (name.length > 80 || message.length > 500) {
-    return { success: false, message: 'Texte trop long.' };
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    return { success: false, message: 'Adresse email invalide.' };
   }
 
   try {
-    await sql`
-      INSERT INTO comments (name, message, approved)
-      VALUES (${name}, ${message}, FALSE)
-    `;
-    revalidatePath('/');
-    return {
-      success: true,
-      message: 'Merci ! Votre commentaire sera visible après validation.',
-    };
+    await resend.emails.send({
+      from: 'Caleb Creative <onboarding@resend.dev>',
+      to: process.env.CONTACT_EMAIL_TO || 'calebagbakou@gmail.com',
+      reply_to: email, // <-- Corrigé ici
+      subject: `Nouveau message de ${name} — Caleb Creative`,
+      text: `Nom : ${name}\nEmail : ${email}\n\nMessage :\n${message}`,
+    });
+    return { success: true, message: 'Message envoyé avec succès !' };
   } catch (error) {
-    return { success: false, message: 'Une erreur est survenue.' };
+    return {
+      success: false,
+      message: "Une erreur est survenue. Réessayez ou contactez-moi directement.",
+    };
   }
-}
-
-// ── Fonctions admin (dashboard) ─────────────────────────────────────────
-
-export async function getAllComments(): Promise<Comment[]> {
-  assertAdmin();
-  const rows = await sql`
-    SELECT id, name, message, approved, created_at
-    FROM comments
-    ORDER BY created_at DESC
-  `;
-  return rows as Comment[];
-}
-
-export async function approveComment(id: number): Promise<void> {
-  assertAdmin();
-  await sql`UPDATE comments SET approved = TRUE WHERE id = ${id}`;
-  revalidatePath('/');
-  revalidatePath('/dashboard');
-}
-
-export async function deleteComment(id: number): Promise<void> {
-  assertAdmin();
-  await sql`DELETE FROM comments WHERE id = ${id}`;
-  revalidatePath('/');
-  revalidatePath('/dashboard');
 }
