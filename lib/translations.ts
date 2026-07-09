@@ -37,51 +37,29 @@ export const translations = {
       footnote:
         '+ Conseil en solutions créatives IA, sur mesure selon votre projet.',
       items: [
-        {
-          title: 'Création de contenu IA',
-          description:
-            "Conception de contenus originaux pensés et produits avec l'aide de l'intelligence artificielle.",
-        },
-        {
-          title: "Création d'images IA",
-          description:
-            'Visuels uniques générés et retravaillés pour coller précisément à votre univers.',
-        },
-        {
-          title: 'Création de vidéos IA',
-          description:
-            "Vidéos courtes ou longues produites grâce aux derniers outils d'IA générative.",
-        },
-        {
-          title: 'Motion Design',
-          description:
-            'Animations graphiques dynamiques pour donner vie à votre message.',
-        },
-        {
-          title: 'Montage vidéo professionnel',
-          description:
-            'Montage soigné, rythmé et adapté à chaque plateforme de diffusion.',
-        },
-        {
-          title: "Création d'affiches",
-          description:
-            'Affiches percutantes pour vos événements, promotions ou campagnes.',
-        },
-        {
-          title: 'Création de logos',
-          description:
-            "Identités visuelles fortes, mémorables et fidèles à votre marque.",
-        },
-        {
-          title: 'Retouche photo avec IA',
-          description:
-            'Correction et sublimation de vos photos avec précision et rapidité.',
-        },
-        {
-          title: 'Prompt Engineering',
-          description:
-            "Conception de prompts optimisés pour exploiter tout le potentiel des IA créatives.",
-        },
+        { title: 'Création de contenu IA', description: "Conception de contenus originaux pensés et produits avec l'aide de l'intelligence artificielle." },
+        { title: "Création d'images IA", description: 'Visuels uniques générés et retravaillés pour coller précisément à votre univers.' },
+        { title: 'Création de vidéos IA', description: "Vidéos courtes ou longues produites grâce aux derniers outils d'IA générative." },
+        { title: 'Motion Design', description: 'Animations graphiques dynamiques pour donner vie à votre message.' },
+        { title: 'Montage vidéo professionnel', description: 'Montage soigné, rythmé et adapté à chaque plateforme de diffusion.' },
+        { title: "Création d'affiches", description: 'Affiches percutantes pour vos événements, promotions ou campagnes.' },
+        { title: 'Création de logos', description: "Identités visuelles fortes, mémorables et fidèles à votre marque." },
+        { title: 'Retouche photo avec IA', description: 'Correction et sublimation de vos photos avec précision et rapidité.' },
+        { title: 'Prompt Engineering', description: "Conception de prompts optimisés pour exploiter tout le potentiel des IA créatives." },
+      ],
+    },
+    portfolio: {
+      badge: 'Portfolio',
+      title: 'Quelques réalisations récentes.',
+      categories: ['Tout', 'Images IA', 'Vidéos IA', 'Publicités', 'Motion Design', 'Logos', 'Affiches', 'Retouches photo'],
+      projects: [
+        { title: 'Campagne Aurora', category: 'Images IA', description: 'Série visuelle pour un lancement de marque.' },
+        { title: 'Teaser produit', category: 'Vidéos IA', description: 'Vidéo courte générée pour les réseaux sociaux.' },
+        { title: 'Affiche événement', category: 'Affiches', description: "Affiche promotionnelle pour un événement local." },
+        { title: 'Logo Nova Studio', category: 'Logos', description: "Identité visuelle complète d'un studio créatif." },
+        { title: 'Motion intro', category: 'Motion Design', description: "Animation d'introduction pour une chaîne vidéo." },
+        { title: 'Retouche portrait', category: 'Retouches photo', description: 'Sublimation et correction de portrait.' },
+        { title: 'Pub réseaux sociaux', category: 'Publicités', description: 'Visuel publicitaire pour campagne digitale.' },
       ],
     },
   },
@@ -120,45 +98,29 @@ export const translations = {
       title: 'Complete creative solutions, powered by AI.',
       footnote: '+ AI creative solutions consulting, tailored to your project.',
       items: [
-        {
-          title: 'AI content creation',
-          description:
-            'Original content designed and produced with the help of artificial intelligence.',
-        },
-        {
-          title: 'AI image creation',
-          description:
-            'Unique visuals generated and refined to precisely match your world.',
-        },
-        {
-          title: 'AI video creation',
-          description:
-            'Short or long videos produced using the latest generative AI tools.',
-        },
-        {
-          title: 'Motion Design',
-          description: 'Dynamic graphic animations to bring your message to life.',
-        },
-        {
-          title: 'Professional video editing',
-          description: 'Polished, well-paced editing adapted to each distribution platform.',
-        },
-        {
-          title: 'Poster creation',
-          description: 'Striking posters for your events, promotions or campaigns.',
-        },
-        {
-          title: 'Logo creation',
-          description: 'Strong, memorable visual identities true to your brand.',
-        },
-        {
-          title: 'AI photo retouching',
-          description: 'Precise, fast correction and enhancement of your photos.',
-        },
-        {
-          title: 'Prompt Engineering',
-          description: 'Optimized prompt design to unlock the full potential of creative AI.',
-        },
+        { title: 'AI content creation', description: 'Original content designed and produced with the help of artificial intelligence.' },
+        { title: 'AI image creation', description: 'Unique visuals generated and refined to precisely match your world.' },
+        { title: 'AI video creation', description: 'Short or long videos produced using the latest generative AI tools.' },
+        { title: 'Motion Design', description: 'Dynamic graphic animations to bring your message to life.' },
+        { title: 'Professional video editing', description: 'Polished, well-paced editing adapted to each distribution platform.' },
+        { title: 'Poster creation', description: 'Striking posters for your events, promotions or campaigns.' },
+        { title: 'Logo creation', description: 'Strong, memorable visual identities true to your brand.' },
+        { title: 'AI photo retouching', description: 'Precise, fast correction and enhancement of your photos.' },
+        { title: 'Prompt Engineering', description: 'Optimized prompt design to unlock the full potential of creative AI.' },
+      ],
+    },
+    portfolio: {
+      badge: 'Portfolio',
+      title: 'Some recent work.',
+      categories: ['All', 'AI Images', 'AI Videos', 'Ads', 'Motion Design', 'Logos', 'Posters', 'Photo retouching'],
+      projects: [
+        { title: 'Aurora Campaign', category: 'AI Images', description: 'Visual series for a brand launch.' },
+        { title: 'Product teaser', category: 'AI Videos', description: 'Short video generated for social media.' },
+        { title: 'Event poster', category: 'Posters', description: 'Promotional poster for a local event.' },
+        { title: 'Nova Studio logo', category: 'Logos', description: 'Complete visual identity for a creative studio.' },
+        { title: 'Motion intro', category: 'Motion Design', description: 'Intro animation for a video channel.' },
+        { title: 'Portrait retouching', category: 'Photo retouching', description: 'Portrait enhancement and correction.' },
+        { title: 'Social media ad', category: 'Ads', description: 'Advertising visual for a digital campaign.' },
       ],
     },
   },
