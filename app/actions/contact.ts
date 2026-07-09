@@ -32,7 +32,7 @@ export async function sendContactMessage(
     await resend.emails.send({
       from: 'Caleb Creative <onboarding@resend.dev>',
       to: process.env.CONTACT_EMAIL_TO || 'calebagbakou@gmail.com',
-      replyTo: email,
+      reply_to: email, // <-- Correction ici
       subject: `Nouveau message de ${name} — Caleb Creative`,
       text: `Nom : ${name}\nEmail : ${email}\n\nMessage :\n${message}`,
     });
