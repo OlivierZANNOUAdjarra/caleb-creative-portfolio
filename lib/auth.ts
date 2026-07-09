@@ -1,5 +1,3 @@
-import crypto from 'crypto';
-
 const SEVEN_DAYS = 60 * 60 * 24 * 7;
 
 function getSecret(): string {
@@ -8,30 +6,66 @@ function getSecret(): string {
   return secret;
 }
 
-function sign(payload: string): string {
-  return crypto.createHmac('sha256', getSecret()).update(payload).digest('hex');
+const encoder = new TextEncoder();
+
+/**
+ * Génère une signature HMAC-SHA256 compatible avec l'Edge Runtime.
+ */
+async function sign(payload: string): Promise<string> {
+  const secret = getSecret();
+  
+  // Importation de la clé secrète pour Web Crypto
+  const key = await crypto.subtle.importKey(
+    'raw',
+    encoder.encode(secret),
+    { name: 'HMAC', hash: 'SHA-256' },
+    false,
+    ['sign']
+  );
+
+  // Calcul de la signature
+  const signatureBuffer = await crypto.subtle.sign(
+    'HMAC',
+    key,
+    encoder.encode(payload)
+  );
+
+  // Conversion du buffer binaire en chaîne de caractères hexadécimale
+  return Array.from(new Uint8Array(signatureBuffer))
+    .map(b => b.toString(16).padStart(2, '0'))
+    .join('');
 }
 
-export function createSessionToken(): string {
+/**
+ * Compare deux chaînes en temps constant pour éviter les attaques temporelles (timing attacks).
+ * Remplace avantageusement crypto.timingSafeEqual de Node.js.
+ */
+function timingSafeEqual(a: string, b: string): boolean {
+  if (a.length !== b.length) return false;
+  let result = 0;
+  for (let i = 0; i < a.length; i++) {
+    result |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  }
+  return result === 0;
+}
+
+export async function createSessionToken(): Promise<string> {
   const expires = Date.now() + SEVEN_DAYS * 1000;
   const payload = `admin.${expires}`;
-  const signature = sign(payload);
+  const signature = await sign(payload);
   return `${payload}.${signature}`;
 }
 
-export function verifySessionToken(token: string | undefined): boolean {
+export async function verifySessionToken(token: string | undefined): Promise<boolean> {
   if (!token) return false;
   const parts = token.split('.');
   if (parts.length !== 3) return false;
 
   const [role, expiresStr, signature] = parts;
   const payload = `${role}.${expiresStr}`;
-  const expectedSignature = sign(payload);
+  const expectedSignature = await sign(payload);
 
-  const validSignature =
-    signature.length === expectedSignature.length &&
-    crypto.timingSafeEqual(Buffer.from(signature), Buffer.from(expectedSignature));
-
+  const validSignature = timingSafeEqual(signature, expectedSignature);
   if (!validSignature) return false;
 
   const expires = Number(expiresStr);
