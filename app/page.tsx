@@ -1,4 +1,5 @@
 'use client';
+import ServicesSection from '@/components/ServicesSection';
 import AboutSection from '@/components/AboutSection';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
@@ -111,6 +112,7 @@ export default function Home() {
         </motion.div>
       </section>
       <AboutSection />
+      <ServicesSection />
       {/* ── BOUTON WHATSAPP FLOTTANT ─────────────────────────────────── */}
       <a
         href={WHATSAPP_LINK}
