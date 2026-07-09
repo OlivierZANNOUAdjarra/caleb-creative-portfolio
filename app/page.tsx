@@ -85,7 +85,7 @@ export default function Home() {
               className="inline-flex items-center justify-center gap-2 rounded-full border border-ink/15 bg-paper px-6 py-3.5 font-body text-sm font-medium text-ink transition-transform hover:-translate-y-0.5 hover:border-electric/40 hover:text-electric dark:border-white/15 dark:bg-transparent dark:text-paper"
             >
               <MessageCircle className="h-4 w-4" />
-              {t.hero.ctaWhatsapp}
+              {t.hero.ctaNavigation || t.hero.ctaWhatsapp}
             </a>
 
             <a
