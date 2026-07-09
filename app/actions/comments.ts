@@ -1,46 +1,24 @@
 'use server';
 
-import { Resend } from 'resend';
+// Exemple de structure attendue pour app/actions/comments.ts
+// Remplacez cette logique fictive par votre propre système de stockage (Base de données, Prisma, etc.)
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+export async function submitComment(formData: FormData) {
+  // Votre logique pour créer un commentaire
+}
 
-type ContactResult = { success: boolean; message: string };
+export async function getApprovedComments() {
+  // Votre logique pour récupérer les commentaires validés
+}
 
-export async function sendContactMessage(
-  formData: FormData
-): Promise<ContactResult> {
-  const name = String(formData.get('name') || '').trim();
-  const email = String(formData.get('email') || '').trim();
-  const message = String(formData.get('message') || '').trim();
+export async function getAllComments() {
+  // Votre logique pour récupérer tous les commentaires (Dashboard)
+}
 
-  // Protection anti-spam basique : champ "piège" invisible pour les humains
-  const honeypot = String(formData.get('company') || '').trim();
-  if (honeypot) {
-    return { success: true, message: 'Message envoyé.' };
-  }
+export async function approveComment(commentId: string) {
+  // Votre logique pour approuver un commentaire
+}
 
-  if (!name || !email || !message) {
-    return { success: false, message: 'Merci de remplir tous les champs.' };
-  }
-
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(email)) {
-    return { success: false, message: 'Adresse email invalide.' };
-  }
-
-  try {
-    await resend.emails.send({
-      from: 'Caleb Creative <onboarding@resend.dev>',
-      to: process.env.CONTACT_EMAIL_TO || 'calebagbakou@gmail.com',
-      reply_to: email, // <-- Corrigé ici
-      subject: `Nouveau message de ${name} — Caleb Creative`,
-      text: `Nom : ${name}\nEmail : ${email}\n\nMessage :\n${message}`,
-    });
-    return { success: true, message: 'Message envoyé avec succès !' };
-  } catch (error) {
-    return {
-      success: false,
-      message: "Une erreur est survenue. Réessayez ou contactez-moi directement.",
-    };
-  }
+export async function deleteComment(commentId: string) {
+  // Votre logique pour supprimer un commentaire
 }
