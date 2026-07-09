@@ -122,6 +122,7 @@ export default function Home() {
       <ToolsSection />
       <FaqSection />
       <ContactSection />
+      <CommentsSection />
       {/* ── BOUTON WHATSAPP FLOTTANT ─────────────────────────────────── */}
       <a
         href={WHATSAPP_LINK}
