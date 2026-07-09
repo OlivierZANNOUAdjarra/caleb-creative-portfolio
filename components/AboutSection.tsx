@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Sparkles, Users, Target } from 'lucide-react';
+import { useLanguage } from '@/lib/language-context';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -12,9 +13,10 @@ const fadeUp = {
   }),
 };
 
-const audiences = ['Particuliers', 'Entreprises', 'Organisations'];
-
 export default function AboutSection() {
+  const { t } = useLanguage();
+  const a = t.about;
+
   return (
     <section
       id="a-propos"
@@ -29,7 +31,7 @@ export default function AboutSection() {
         className="inline-flex items-center gap-2 font-display text-xs font-medium uppercase tracking-[0.2em] text-electric"
       >
         <Sparkles className="h-3.5 w-3.5" />
-        À propos
+        {a.badge}
       </motion.p>
 
       <motion.h2
@@ -38,10 +40,9 @@ export default function AboutSection() {
         viewport={{ once: true, amount: 0.4 }}
         custom={0.1}
         variants={fadeUp}
-        className="mt-4 max-w-2xl font-display text-2xl font-semibold text-balance text-ink sm:text-3xl lg:text-4xl"
+        className="mt-4 max-w-2xl font-display text-2xl font-semibold text-balance text-ink sm:text-3xl lg:text-4xl dark:text-paper"
       >
-        Passionné par la création visuelle, augmenté par l&apos;intelligence
-        artificielle.
+        {a.title}
       </motion.h2>
 
       <div className="mt-10 grid gap-10 lg:grid-cols-[1.4fr_1fr] lg:gap-16">
@@ -51,21 +52,10 @@ export default function AboutSection() {
           viewport={{ once: true, amount: 0.3 }}
           custom={0.2}
           variants={fadeUp}
-          className="space-y-5 font-body text-base leading-relaxed text-ink/75 sm:text-lg"
+          className="space-y-5 font-body text-base leading-relaxed text-ink/75 sm:text-lg dark:text-paper/75"
         >
-          <p>
-            Depuis près de deux ans, <strong className="text-ink">Caleb
-            Jesugnon AGBAKOU</strong> met la puissance de l&apos;intelligence
-            artificielle au service de la créativité, pour transformer les
-            idées en réalisations concrètes — qu&apos;il s&apos;agisse
-            d&apos;images, de vidéos, de designs ou d&apos;identités
-            visuelles.
-          </p>
-          <p>
-            Créatif, innovant et attentif aux détails, il accompagne
-            particuliers, entreprises et organisations dans la conception de
-            contenus visuels uniques.
-          </p>
+          <p>{a.paragraph1}</p>
+          <p>{a.paragraph2}</p>
         </motion.div>
 
         <motion.div
@@ -74,34 +64,33 @@ export default function AboutSection() {
           viewport={{ once: true, amount: 0.3 }}
           custom={0.3}
           variants={fadeUp}
-          className="flex flex-col gap-5 rounded-xl2 border border-ink/10 bg-white/60 p-6 shadow-sm shadow-ink/5 backdrop-blur-sm"
+          className="flex flex-col gap-5 rounded-xl2 border border-ink/10 bg-white/60 p-6 shadow-sm shadow-ink/5 backdrop-blur-sm dark:border-white/10 dark:bg-white/5"
         >
           <div className="flex items-start gap-3">
             <Target className="mt-1 h-5 w-5 shrink-0 text-electric" />
             <div>
-              <p className="font-display text-sm font-semibold uppercase tracking-wide text-ink">
-                Mission
+              <p className="font-display text-sm font-semibold uppercase tracking-wide text-ink dark:text-paper">
+                {a.missionLabel}
               </p>
-              <p className="mt-1 text-sm text-ink/70">
-                Transformer les idées en réalisations visuelles
-                d&apos;exception.
+              <p className="mt-1 text-sm text-ink/70 dark:text-paper/70">
+                {a.missionText}
               </p>
             </div>
           </div>
 
-          <div className="flex items-start gap-3 border-t border-ink/10 pt-5">
+          <div className="flex items-start gap-3 border-t border-ink/10 pt-5 dark:border-white/10">
             <Users className="mt-1 h-5 w-5 shrink-0 text-signal" />
             <div>
-              <p className="font-display text-sm font-semibold uppercase tracking-wide text-ink">
-                Accompagne
+              <p className="font-display text-sm font-semibold uppercase tracking-wide text-ink dark:text-paper">
+                {a.audienceLabel}
               </p>
               <div className="mt-2 flex flex-wrap gap-2">
-                {audiences.map((a) => (
+                {a.audiences.map((aud) => (
                   <span
-                    key={a}
+                    key={aud}
                     className="rounded-full bg-signal/10 px-3 py-1 text-xs font-medium text-signal"
                   >
-                    {a}
+                    {aud}
                   </span>
                 ))}
               </div>
@@ -111,4 +100,4 @@ export default function AboutSection() {
       </div>
     </section>
   );
-      }
+}
