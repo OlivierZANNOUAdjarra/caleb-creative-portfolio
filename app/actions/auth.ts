@@ -16,7 +16,7 @@ export async function login(
     return { success: false, message: 'Email ou mot de passe incorrect.' };
   }
 
-  // Ajout de await ici car createSessionToken() retourne maintenant une Promise
+  // Corrigé : ajout de await car la fonction est asynchrone maintenant
   const token = await createSessionToken();
   
   cookies().set(COOKIE_NAME, token, {
