@@ -1,10 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { verifySessionToken } from '@/lib/auth';
 
-export function middleware(request: NextRequest) {
+// Ajout de "async" ici pour pouvoir utiliser "await" à l'intérieur
+export async function middleware(request: NextRequest) {
   const isLoginPage = request.nextUrl.pathname === '/dashboard/login';
   const token = request.cookies.get('cc_session')?.value;
-  const isValid = verifySessionToken(token);
+  
+  // Ajout de "await" ici car verifySessionToken est devenue asynchrone
+  const isValid = await verifySessionToken(token);
 
   if (isLoginPage) {
     if (isValid) {
