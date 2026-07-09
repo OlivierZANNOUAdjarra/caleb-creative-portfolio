@@ -1,4 +1,9 @@
 'use client';
+
+import Image from 'next/image';
+import { motion } from 'framer-motion';
+import { MessageCircle, ArrowRight, Sparkles } from 'lucide-react';
+import { useLanguage } from '@/lib/language-context';
 import AboutSection from '@/components/AboutSection';
 import ServicesSection from '@/components/ServicesSection';
 import PortfolioSection from '@/components/PortfolioSection';
@@ -6,9 +11,6 @@ import ToolsSection from '@/components/ToolsSection';
 import FaqSection from '@/components/FaqSection';
 import ContactSection from '@/components/ContactSection';
 import CommentsSection from '@/components/CommentsSection';
-import Image from 'next/image';
-import { motion } from 'framer-motion';
-import { MessageCircle, ArrowRight, Sparkles } from 'lucide-react';
 
 const WHATSAPP_NUMBER = '22901481395395';
 const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}`;
@@ -23,11 +25,12 @@ const fadeUp = {
 };
 
 export default function Home() {
+  const { t } = useLanguage();
+
   return (
     <main className="relative">
       {/* ── HERO ─────────────────────────────────────────────────────── */}
       <section className="relative flex min-h-screen flex-col items-center justify-center gap-10 overflow-hidden px-6 py-24 text-center sm:px-10 lg:flex-row lg:justify-between lg:text-left">
-        {/* Texte */}
         <div className="max-w-2xl">
           <motion.p
             initial="hidden"
@@ -37,7 +40,7 @@ export default function Home() {
             className="inline-flex items-center gap-2 rounded-full border border-electric/30 bg-electric/5 px-4 py-1.5 font-display text-xs font-medium uppercase tracking-[0.2em] text-electric"
           >
             <Sparkles className="h-3.5 w-3.5" />
-            Caleb Creative
+            {t.hero.badge}
           </motion.p>
 
           <motion.h1
@@ -45,11 +48,9 @@ export default function Home() {
             animate="show"
             custom={0.15}
             variants={fadeUp}
-            className="mt-6 font-display text-3xl font-semibold leading-tight text-balance text-ink sm:text-4xl lg:text-5xl"
+            className="mt-6 font-display text-3xl font-semibold leading-tight text-balance text-ink sm:text-4xl lg:text-5xl dark:text-paper"
           >
-            Images, vidéos, design et innovation&nbsp;: je transforme vos idées
-            en réalisations d&apos;exception grâce à l&apos;intelligence
-            artificielle.
+            {t.hero.title}
           </motion.h1>
 
           <motion.p
@@ -59,7 +60,7 @@ export default function Home() {
             variants={fadeUp}
             className="mt-5 font-display text-lg italic text-electric sm:text-xl"
           >
-            La seule limite est votre imagination.
+            {t.hero.subtitle}
           </motion.p>
 
           <motion.div
@@ -71,9 +72,9 @@ export default function Home() {
           >
             <a
               href="#portfolio"
-              className="group inline-flex items-center justify-center gap-2 rounded-full bg-ink px-6 py-3.5 font-body text-sm font-medium text-paper transition-transform hover:-translate-y-0.5 hover:shadow-lg hover:shadow-ink/20"
+              className="group inline-flex items-center justify-center gap-2 rounded-full bg-ink px-6 py-3.5 font-body text-sm font-medium text-paper transition-transform hover:-translate-y-0.5 hover:shadow-lg hover:shadow-ink/20 dark:bg-electric"
             >
-              Voir mes réalisations
+              {t.hero.ctaPortfolio}
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </a>
 
@@ -81,22 +82,21 @@ export default function Home() {
               href={WHATSAPP_LINK}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-ink/15 bg-paper px-6 py-3.5 font-body text-sm font-medium text-ink transition-transform hover:-translate-y-0.5 hover:border-electric/40 hover:text-electric"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-ink/15 bg-paper px-6 py-3.5 font-body text-sm font-medium text-ink transition-transform hover:-translate-y-0.5 hover:border-electric/40 hover:text-electric dark:border-white/15 dark:bg-transparent dark:text-paper"
             >
               <MessageCircle className="h-4 w-4" />
-              Me contacter sur WhatsApp
+              {t.hero.ctaWhatsapp}
             </a>
 
             <a
               href="#contact"
-              className="inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 font-body text-sm font-medium text-ink/70 underline-offset-4 transition-colors hover:text-electric hover:underline"
+              className="inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 font-body text-sm font-medium text-ink/70 underline-offset-4 transition-colors hover:text-electric hover:underline dark:text-paper/70"
             >
-              Me contacter
+              {t.hero.ctaContact}
             </a>
           </motion.div>
         </div>
 
-        {/* Photo professionnelle */}
         <motion.div
           initial={{ opacity: 0, scale: 0.92 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -116,6 +116,7 @@ export default function Home() {
           </div>
         </motion.div>
       </section>
+
       <AboutSection />
       <ServicesSection />
       <PortfolioSection />
@@ -123,6 +124,7 @@ export default function Home() {
       <FaqSection />
       <ContactSection />
       <CommentsSection />
+
       {/* ── BOUTON WHATSAPP FLOTTANT ─────────────────────────────────── */}
       <a
         href={WHATSAPP_LINK}
