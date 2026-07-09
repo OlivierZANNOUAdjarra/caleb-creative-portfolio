@@ -1,5 +1,5 @@
 'use client';
-
+import AboutSection from '@/components/AboutSection';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { MessageCircle, ArrowRight, Sparkles } from 'lucide-react';
@@ -110,7 +110,7 @@ export default function Home() {
           </div>
         </motion.div>
       </section>
-
+      <AboutSection />
       {/* ── BOUTON WHATSAPP FLOTTANT ─────────────────────────────────── */}
       <a
         href={WHATSAPP_LINK}
