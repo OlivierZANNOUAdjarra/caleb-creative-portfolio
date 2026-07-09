@@ -62,6 +62,14 @@ export const translations = {
         { title: 'Pub réseaux sociaux', category: 'Publicités', description: 'Visuel publicitaire pour campagne digitale.' },
       ],
     },
+    tools: {
+      badge: 'Outils maîtrisés',
+      title: "Un savoir-faire technique, augmenté par l'IA.",
+      softwareLabel: 'Logiciels',
+      aiLabel: 'Intelligence artificielle',
+      software: ['Adobe Photoshop', 'Adobe Premiere Pro', 'Adobe After Effects', 'CapCut', 'Canva'],
+      aiTools: ['ChatGPT', 'Midjourney', 'Flux', 'Kling AI', 'Runway', 'Veo', 'Leonardo AI', 'Gemini', 'Ideogram'],
+    },
   },
   en: {
     nav: {
@@ -123,7 +131,16 @@ export const translations = {
         { title: 'Social media ad', category: 'Ads', description: 'Advertising visual for a digital campaign.' },
       ],
     },
+    tools: {
+      badge: 'Tools mastered',
+      title: 'Technical expertise, enhanced by AI.',
+      softwareLabel: 'Software',
+      aiLabel: 'Artificial intelligence',
+      software: ['Adobe Photoshop', 'Adobe Premiere Pro', 'Adobe After Effects', 'CapCut', 'Canva'],
+      aiTools: ['ChatGPT', 'Midjourney', 'Flux', 'Kling AI', 'Runway', 'Veo', 'Leonardo AI', 'Gemini', 'Ideogram'],
+    },
   },
 } as const;
 
 export type Lang = keyof typeof translations;
+    
