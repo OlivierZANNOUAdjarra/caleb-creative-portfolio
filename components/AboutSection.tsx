@@ -85,7 +85,8 @@ export default function AboutSection() {
                 {a.audienceLabel}
               </p>
               <div className="mt-2 flex flex-wrap gap-2">
-                {a.audiences.map((aud) => (
+                {/* Ajout du type explicite (aud: string) ici pour corriger l'erreur de build */}
+                {a.audiences.map((aud: string) => (
                   <span
                     key={aud}
                     className="rounded-full bg-signal/10 px-3 py-1 text-xs font-medium text-signal"
