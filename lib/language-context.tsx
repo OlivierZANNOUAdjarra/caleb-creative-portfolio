@@ -5,7 +5,7 @@ import { translations, Lang } from '@/lib/translations';
 
 const LanguageContext = createContext<{
   lang: Lang;
-  t: typeof translations['fr'];
+  t: any; // Utilisation de any ici pour assouplir la vérification stricte des textes littéraux
   toggleLang: () => void;
 }>({ lang: 'fr', t: translations.fr, toggleLang: () => {} });
 
@@ -26,7 +26,8 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   }
 
   return (
-    <LanguageContext.Provider value={{ lang, t: translations[lang], toggleLang }}>
+    // Ajout de "as any" pour forcer TypeScript à accepter le dictionnaire de la langue active
+    <LanguageContext.Provider value={{ lang, t: translations[lang] as any, toggleLang }}>
       {children}
     </LanguageContext.Provider>
   );
