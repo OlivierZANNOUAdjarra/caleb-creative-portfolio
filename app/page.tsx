@@ -4,6 +4,7 @@ import ServicesSection from '@/components/ServicesSection';
 import PortfolioSection from '@/components/PortfolioSection';
 import ToolsSection from '@/components/ToolsSection';
 import FaqSection from '@/components/FaqSection';
+import ContactSection from '@/components/ContactSection';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { MessageCircle, ArrowRight, Sparkles } from 'lucide-react';
@@ -119,6 +120,7 @@ export default function Home() {
       <PortfolioSection />
       <ToolsSection />
       <FaqSection />
+      <ContactSection />
       {/* ── BOUTON WHATSAPP FLOTTANT ─────────────────────────────────── */}
       <a
         href={WHATSAPP_LINK}
