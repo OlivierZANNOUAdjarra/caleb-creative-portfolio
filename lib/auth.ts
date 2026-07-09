@@ -8,13 +8,10 @@ function getSecret(): string {
 
 const encoder = new TextEncoder();
 
-/**
- * Génère une signature HMAC-SHA256 compatible avec l'Edge Runtime.
- */
+// Fonction de signature HMAC-SHA256 compatible Edge Runtime (sans import)
 async function sign(payload: string): Promise<string> {
   const secret = getSecret();
   
-  // Importation de la clé secrète pour Web Crypto
   const key = await crypto.subtle.importKey(
     'raw',
     encoder.encode(secret),
@@ -23,23 +20,18 @@ async function sign(payload: string): Promise<string> {
     ['sign']
   );
 
-  // Calcul de la signature
   const signatureBuffer = await crypto.subtle.sign(
     'HMAC',
     key,
     encoder.encode(payload)
   );
 
-  // Conversion du buffer binaire en chaîne de caractères hexadécimale
   return Array.from(new Uint8Array(signatureBuffer))
     .map(b => b.toString(16).padStart(2, '0'))
     .join('');
 }
 
-/**
- * Compare deux chaînes en temps constant pour éviter les attaques temporelles (timing attacks).
- * Remplace avantageusement crypto.timingSafeEqual de Node.js.
- */
+// Comparaison sécurisée en temps constant
 function timingSafeEqual(a: string, b: string): boolean {
   if (a.length !== b.length) return false;
   let result = 0;
