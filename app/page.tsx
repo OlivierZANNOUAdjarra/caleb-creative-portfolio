@@ -5,6 +5,7 @@ import PortfolioSection from '@/components/PortfolioSection';
 import ToolsSection from '@/components/ToolsSection';
 import FaqSection from '@/components/FaqSection';
 import ContactSection from '@/components/ContactSection';
+import CommentsSection from '@/components/CommentsSection';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { MessageCircle, ArrowRight, Sparkles } from 'lucide-react';
