@@ -1,6 +1,6 @@
 'use client';
-import ServicesSection from '@/components/ServicesSection';
 import AboutSection from '@/components/AboutSection';
+import ServicesSection from '@/components/ServicesSection';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { MessageCircle, ArrowRight, Sparkles } from 'lucide-react';
