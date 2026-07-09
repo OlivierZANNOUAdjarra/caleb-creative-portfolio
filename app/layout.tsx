@@ -4,6 +4,7 @@ import './globals.css';
 import { ThemeProvider } from '@/lib/theme-context';
 import { LanguageProvider } from '@/lib/language-context';
 import SiteControls from '@/components/SiteControls';
+import WelcomeLoader from '@/components/WelcomeLoader'; // <-- 1. Importation du loader
 
 const display = Space_Grotesk({
   subsets: ['latin'],
@@ -76,8 +77,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fr" className={`${display.variable} ${body.variable}`} suppressHydrationWarning>
-      {/* Modification de la ligne body ci-dessous pour forcer un arrière-plan sombre global et des textes clairs */}
       <body className="relative min-h-screen overflow-x-hidden bg-paper font-body text-ink transition-colors dark:bg-[#09090b] dark:text-[#f4f4f5]">
+        {/* 2. Injection du loader au tout début de l'application */}
+        <WelcomeLoader />
+        
         <ThemeProvider>
           <LanguageProvider>
             <div
