@@ -32,7 +32,8 @@ export default async function CommentsSection() {
               className="rounded-xl2 border border-ink/10 bg-white/60 p-5 backdrop-blur-sm"
             >
               <p className="font-display text-sm font-semibold text-ink">{c.name}</p>
-              <p className="mt-2 text-sm leading-relaxed text-ink/70">{c.message}</p>
+              <p className="mt-2 text-sm leading-relaxed text-ink/70">{c.content}</p>
+
             </div>
           ))
         )}
