@@ -76,12 +76,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fr" className={`${display.variable} ${body.variable}`} suppressHydrationWarning>
-      <body className="relative min-h-screen overflow-x-hidden bg-paper font-body text-ink transition-colors dark:bg-paper-dark dark:text-paper">
+      {/* Modification de la ligne body ci-dessous pour forcer un arrière-plan sombre global et des textes clairs */}
+      <body className="relative min-h-screen overflow-x-hidden bg-paper font-body text-ink transition-colors dark:bg-[#09090b] dark:text-[#f4f4f5]">
         <ThemeProvider>
           <LanguageProvider>
             <div
               aria-hidden
-              className="pointer-events-none fixed inset-0 -z-10 bg-aurora-gradient"
+              className="pointer-events-none fixed inset-0 -z-10 bg-aurora-gradient opacity-100 dark:opacity-20"
             />
             <SiteControls />
             {children}
