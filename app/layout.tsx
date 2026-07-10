@@ -67,7 +67,8 @@ export const metadata: Metadata = {
       "Images, vidéos, design et innovation propulsés par l'intelligence artificielle.",
   },
   icons: {
-    icon: '/favicon.ico',
+    icon: '/logo.png',
+    apple: '/logo.png',
   },
 };
 
