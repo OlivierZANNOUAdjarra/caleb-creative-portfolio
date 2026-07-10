@@ -7,18 +7,26 @@ import ToolsSection from '@/components/ToolsSection';
 import FaqSection from '@/components/FaqSection';
 import ContactSection from '@/components/ContactSection';
 import CommentsSection from '@/components/CommentsSection';
+import SectionDivider from '@/components/SectionDivider';
 
 export default function Home() {
   return (
     <main className="relative">
       <HeroSection />
       <StatsCounter />
+      <SectionDivider />
       <AboutSection />
+      <SectionDivider />
       <ServicesSection />
+      <SectionDivider />
       <PortfolioSection />
+      <SectionDivider />
       <ToolsSection />
+      <SectionDivider />
       <FaqSection />
+      <SectionDivider />
       <ContactSection />
+      <SectionDivider />
       <CommentsSection />
     </main>
   );
