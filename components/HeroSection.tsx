@@ -7,7 +7,7 @@ import { useLanguage } from '@/lib/language-context';
 import { useTypewriter } from '@/lib/useTypewriter';
 import WhatsAppIcon from '@/components/WhatsAppIcon';
 
-const WHATSAPP_NUMBER = '22901481395395';
+const WHATSAPP_NUMBER = '2290148135395';
 const WHATSAPP_MESSAGE =
   "Bonjour Caleb ! Je découvre votre portfolio Caleb Creative et j'aimerais échanger sur un projet.";
 const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
