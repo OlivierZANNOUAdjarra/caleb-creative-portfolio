@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     'motion design',
     'montage vidéo',
     'Midjourney',
-    'Runway',
+    'Claude AI',
     'création de logo',
   ],
   authors: [{ name: 'Caleb Jesugnon AGBAKOU' }],
