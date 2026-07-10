@@ -14,7 +14,7 @@ export default function ContactSection() {
 
   const contactInfo = [
     { icon: Mail, label: 'calebagbakou@gmail.com', href: 'mailto:calebagbakou@gmail.com' },
-    { icon: Phone, label: '+229 01 48 13 53 95 (WhatsApp)', href: 'https://wa.me/22901481395395' },
+    { icon: Phone, label: '+229 01 48 13 53 95 (WhatsApp)', href: 'https://wa.me/2290148135395' },
     { icon: Phone, label: '+229 01 50 25 97 92', href: 'tel:+22901502597092' },
     { icon: Phone, label: '+229 01 95 93 86 00', href: 'tel:+22901959386000' },
     { icon: MapPin, label: c.locationLabel, href: undefined },
