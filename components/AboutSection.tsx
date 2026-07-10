@@ -3,7 +3,6 @@
 import { motion } from 'framer-motion';
 import { Sparkles, Users } from 'lucide-react';
 import { useLanguage } from '@/lib/language-context';
-import Image from 'next/image'; // Importation du composant Image de Next.js
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -68,15 +67,13 @@ export default function AboutSection() {
           className="flex flex-col gap-5 rounded-xl2 border border-ink/10 bg-white/60 p-6 shadow-sm shadow-ink/5 backdrop-blur-sm dark:border-white/10 dark:bg-white/5"
         >
           <div className="flex items-start gap-3">
-            {/* Conteneur circulaire, ajusté à h-11 w-11 pour être un peu plus gros et bien visible */}
-            <div className="mt-0.5 h-11 w-11 shrink-0 overflow-hidden rounded-full border border-ink/5 bg-white shadow-sm dark:border-white/10 dark:bg-white/5 flex items-center justify-center relative">
-              <Image 
-                src="/mission-target.png" 
-                alt="Mission Target" 
-                fill
-                sizes="44px"
-                className="object-cover"
-                priority
+            {/* Conteneur circulaire de taille h-12 w-12 avec le lien d'image direct */}
+            <div className="mt-0.5 h-12 w-12 shrink-0 overflow-hidden rounded-full border border-ink/5 bg-white shadow-sm dark:border-white/10 dark:bg-white/5 flex items-center justify-center p-1">
+              <img 
+                src="https://cdn-icons-png.flaticon.com/512/4887/4887265.png" 
+                alt="Mission Target Icon" 
+                className="h-full w-full object-contain p-0.5"
+                loading="lazy"
               />
             </div>
             <div>
