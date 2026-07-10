@@ -12,7 +12,7 @@ export const translations = {
       badge: 'Caleb Creative',
       title:
         "Images, vidéos, design et innovation : je transforme vos idées en réalisations d'exception grâce à l'intelligence artificielle.",
-      subtitle: 'La seule limite est votre imagination.',
+      subtitle: 'Votre seule limite, c'est votre imagination.',
       ctaPortfolio: 'Voir mes réalisations',
       ctaWhatsapp: 'Me contacter sur WhatsApp',
       ctaContact: 'Me contacter',
