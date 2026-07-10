@@ -111,6 +111,15 @@ export const translations = {
       sending: 'Envoi en cours...',
       locationLabel: 'Abomey – Bénin',
     },
+    comments: {
+      badge: 'Commentaires',
+      title: "Ce qu'en disent les visiteurs.",
+      formName: 'Nom',
+      formMessage: 'Commentaire',
+      submit: 'Publier',
+      sending: 'Envoi...',
+      empty: 'Aucun commentaire pour le moment. Soyez le premier !',
+    },
   },
   en: {
     nav: {
@@ -220,8 +229,17 @@ export const translations = {
       sending: 'Sending...',
       locationLabel: 'Abomey – Benin',
     },
+    comments: {
+      badge: 'Comments',
+      title: 'What visitors are saying.',
+      formName: 'Name',
+      formMessage: 'Comment',
+      submit: 'Post',
+      sending: 'Sending...',
+      empty: 'No comments yet. Be the first!',
+    },
   },
 } as const;
 
 export type Lang = keyof typeof translations;
-         
+    
