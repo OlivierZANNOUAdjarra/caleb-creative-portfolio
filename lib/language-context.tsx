@@ -3,9 +3,11 @@
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import { translations, Lang } from '@/lib/translations';
 
+type Translations = typeof translations['fr'];
+
 const LanguageContext = createContext<{
   lang: Lang;
-  t: typeof translations['fr'];
+  t: Translations;
   toggleLang: () => void;
 }>({ lang: 'fr', t: translations.fr, toggleLang: () => {} });
 
@@ -26,8 +28,10 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     });
   }
 
+  const t = translations[lang] as Translations;
+
   return (
-    <LanguageContext.Provider value={{ lang, t: translations[lang], toggleLang }}>
+    <LanguageContext.Provider value={{ lang, t, toggleLang }}>
       {children}
     </LanguageContext.Provider>
   );
