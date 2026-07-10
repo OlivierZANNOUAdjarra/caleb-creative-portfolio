@@ -1,8 +1,12 @@
 'use client';
 
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Wrench, Cpu } from 'lucide-react';
 import { useLanguage } from '@/lib/language-context';
+
+const SOFTWARE_SLUGS = ['photoshop', 'premiere', 'after-effects', 'capcut', 'canva'];
+const AI_SLUGS = ['chatgpt', 'midjourney', 'flux', 'kling', 'runway', 'veo', 'leonardo', 'gemini', 'ideogram'];
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -13,31 +17,30 @@ const fadeUp = {
   }),
 };
 
-function BadgeGroup({
-  items,
-  accent,
-}: {
-  items: readonly string[];
-  accent: 'electric' | 'signal';
-}) {
+function LogoGrid({ names, slugs }: { names: readonly string[]; slugs: string[] }) {
   return (
-    <div className="flex flex-wrap gap-3">
-      {items.map((tool, i) => (
-        <motion.span
-          key={tool}
+    <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+      {names.map((name, i) => (
+        <motion.div
+          key={name}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.4 }}
-          custom={0.03 * i}
+          custom={0.05 * i}
           variants={fadeUp}
-          className={`rounded-full border px-4 py-2 text-sm font-medium transition-colors ${
-            accent === 'electric'
-              ? 'border-electric/20 bg-electric/5 text-electric hover:bg-electric/10'
-              : 'border-signal/20 bg-signal/5 text-signal hover:bg-signal/10'
-          }`}
+          className="group flex flex-col items-center gap-3 rounded-xl2 border border-ink/10 bg-white/60 p-5 text-center backdrop-blur-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-electric/30 hover:shadow-lg hover:shadow-electric/10 dark:border-white/10 dark:bg-white/5"
         >
-          {tool}
-        </motion.span>
+          <div className="relative h-10 w-10 shrink-0">
+            <Image
+              src={`/logos/${slugs[i]}.png`}
+              alt={name}
+              fill
+              sizes="40px"
+              className="object-contain"
+            />
+          </div>
+          <span className="text-xs font-medium text-ink/70 dark:text-paper/70">{name}</span>
+        </motion.div>
       ))}
     </div>
   );
@@ -72,12 +75,12 @@ export default function ToolsSection() {
         {tl.title}
       </motion.h2>
 
-      <div className="mt-12 space-y-10">
+      <div className="mt-12 space-y-12">
         <div>
           <p className="mb-4 font-display text-sm font-semibold uppercase tracking-wide text-ink/60 dark:text-paper/60">
             {tl.softwareLabel}
           </p>
-          <BadgeGroup items={tl.software} accent="electric" />
+          <LogoGrid names={tl.software} slugs={SOFTWARE_SLUGS} />
         </div>
 
         <div>
@@ -85,7 +88,7 @@ export default function ToolsSection() {
             <Cpu className="h-4 w-4" />
             {tl.aiLabel}
           </p>
-          <BadgeGroup items={tl.aiTools} accent="signal" />
+          <LogoGrid names={tl.aiTools} slugs={AI_SLUGS} />
         </div>
       </div>
     </section>
