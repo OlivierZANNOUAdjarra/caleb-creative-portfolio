@@ -8,6 +8,7 @@ import FaqSection from '@/components/FaqSection';
 import ContactSection from '@/components/ContactSection';
 import CommentsSection from '@/components/CommentsSection';
 import SectionDivider from '@/components/SectionDivider';
+import ParallaxWrapper from '@/components/ParallaxWrapper';
 
 export default function Home() {
   return (
@@ -15,19 +16,33 @@ export default function Home() {
       <HeroSection />
       <StatsCounter />
       <SectionDivider />
-      <AboutSection />
+      <ParallaxWrapper>
+        <AboutSection />
+      </ParallaxWrapper>
       <SectionDivider />
-      <ServicesSection />
+      <ParallaxWrapper>
+        <ServicesSection />
+      </ParallaxWrapper>
       <SectionDivider />
-      <PortfolioSection />
+      <ParallaxWrapper>
+        <PortfolioSection />
+      </ParallaxWrapper>
       <SectionDivider />
-      <ToolsSection />
+      <ParallaxWrapper>
+        <ToolsSection />
+      </ParallaxWrapper>
       <SectionDivider />
-      <FaqSection />
+      <ParallaxWrapper>
+        <FaqSection />
+      </ParallaxWrapper>
       <SectionDivider />
-      <ContactSection />
+      <ParallaxWrapper>
+        <ContactSection />
+      </ParallaxWrapper>
       <SectionDivider />
-      <CommentsSection />
+      <ParallaxWrapper>
+        <CommentsSection />
+      </ParallaxWrapper>
     </main>
   );
 }
