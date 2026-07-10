@@ -1,108 +1,92 @@
 'use server';
 
-import { neon } from '@neondatabase/serverless';
+import { sql } from '@/lib/db';
 import { revalidatePath } from 'next/cache';
-
-// Connexion automatique via ta variable d'environnement Vercel
-const sql = neon(process.env.DATABASE_URL!);
+import { cookies } from 'next/headers';
+import { verifySessionToken } from '@/lib/auth';
 
 export type Comment = {
-  id: string;
+  id: number;
   name: string;
-  email: string;
-  content: string;
+  message: string;
   approved: boolean;
   created_at: string;
 };
 
-/**
- * Soumettre un nouveau commentaire
- */
-export async function submitComment(formData: FormData): Promise<{ success: boolean; message: string }> {
-  const name = String(formData.get('name') || '').trim();
-  const email = String(formData.get('email') || '').trim();
-  const content = String(formData.get('content') || '').trim();
-
-  if (!name || !content) {
-    return { success: false, message: 'Champs requis manquants.' };
-  }
-
-  try {
-    await sql`
-      INSERT INTO comments (name, email, content, approved)
-      VALUES (${name}, ${email}, ${content}, false)
-    `;
-    return { success: true, message: 'Votre commentaire est en attente de modération.' };
-  } catch (error) {
-    console.error(error);
-    return { success: false, message: 'Impossible de soumettre le commentaire.' };
+function assertAdmin() {
+  const token = cookies().get('cc_session')?.value;
+  if (!verifySessionToken(token)) {
+    throw new Error('Non autorisé.');
   }
 }
 
-/**
- * Récupérer les commentaires validés (pour le public)
- */
 export async function getApprovedComments(): Promise<Comment[]> {
+  const rows = await sql`
+    SELECT id, name, message, approved, created_at
+    FROM comments
+    WHERE approved = TRUE
+    ORDER BY created_at DESC
+    LIMIT 20
+  `;
+  return rows as Comment[];
+}
+
+export async function submitComment(
+  formData: FormData
+): Promise<{ success: boolean; message: string }> {
+  const name = String(formData.get('name') || '').trim();
+  const message = String(formData.get('message') || '').trim();
+
+  const honeypot = String(formData.get('company') || '').trim();
+  if (honeypot) {
+    return { success: true, message: 'Merci pour votre commentaire.' };
+  }
+
+  if (!name || !message) {
+    return { success: false, message: 'Merci de remplir tous les champs.' };
+  }
+
+  if (name.length > 80 || message.length > 500) {
+    return { success: false, message: 'Texte trop long.' };
+  }
+
   try {
-    const data = await sql`
-      SELECT * FROM comments 
-      WHERE approved = true 
-      ORDER BY created_at DESC
+    await sql`
+      INSERT INTO comments (name, message, approved)
+      VALUES (${name}, ${message}, FALSE)
     `;
-    return data as Comment[];
+    revalidatePath('/');
+    return {
+      success: true,
+      message: 'Merci ! Votre commentaire sera visible après validation.',
+    };
   } catch (error) {
-    console.error(error);
-    return [];
+    return { success: false, message: 'Une erreur est survenue.' };
   }
 }
 
-/**
- * Récupérer TOUS les commentaires (pour ton Dashboard)
- */
+// ── Fonctions admin (dashboard) ─────────────────────────────────────────
+
 export async function getAllComments(): Promise<Comment[]> {
-  try {
-    const data = await sql`
-      SELECT * FROM comments 
-      ORDER BY created_at DESC
-    `;
-    return data as Comment[]; // Corrigé : garantit un tableau pour éviter l'erreur .filter()
-  } catch (error) {
-    console.error(error);
-    return []; // En cas de bug, renvoie un tableau vide pour ne pas crasher l'admin
-  }
+  assertAdmin();
+  const rows = await sql`
+    SELECT id, name, message, approved, created_at
+    FROM comments
+    ORDER BY created_at DESC
+  `;
+  return rows as Comment[];
 }
 
-/**
- * Approuver un commentaire
- */
-export async function approveComment(commentId: string): Promise<{ success: boolean }> {
-  try {
-    await sql`
-      UPDATE comments 
-      SET approved = true 
-      WHERE id = ${commentId}
-    `;
-    revalidatePath('/dashboard');
-    return { success: true };
-  } catch (error) {
-    console.error(error);
-    return { success: false };
-  }
+export async function approveComment(id: number): Promise<void> {
+  assertAdmin();
+  await sql`UPDATE comments SET approved = TRUE WHERE id = ${id}`;
+  revalidatePath('/');
+  revalidatePath('/dashboard');
 }
 
-/**
- * Supprimer un commentaire
- */
-export async function deleteComment(commentId: string): Promise<{ success: boolean }> {
-  try {
-    await sql`
-      DELETE FROM comments 
-      WHERE id = ${commentId}
-    `;
-    revalidatePath('/dashboard');
-    return { success: true };
-  } catch (error) {
-    console.error(error);
-    return { success: false };
-  }
+export async function deleteComment(id: number): Promise<void> {
+  assertAdmin();
+  await sql`DELETE FROM comments WHERE id = ${id}`;
+  revalidatePath('/');
+  revalidatePath('/dashboard');
 }
