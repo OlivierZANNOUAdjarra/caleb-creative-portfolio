@@ -16,7 +16,7 @@ export default function ContactSection() {
     { icon: Mail, label: 'calebagbakou@gmail.com', href: 'mailto:calebagbakou@gmail.com' },
     { icon: Phone, label: '+229 01 48 13 53 95 (WhatsApp)', href: 'https://wa.me/2290148135395' },
     { icon: Phone, label: '+229 01 50 25 97 92', href: 'tel:+22901502597092' },
-    { icon: Phone, label: '+229 01 95 93 86 00', href: 'tel:+22901959386000' },
+    { icon: Phone, label: '+229 01 95 93 86 00', href: 'tel:+2290195938600' },
     { icon: MapPin, label: c.locationLabel, href: undefined },
   ];
 
@@ -57,25 +57,24 @@ export default function ContactSection() {
             );
           })}
 
-          {/* Ligne Facebook uniquement */}
+          {/* Facebook épuré avec ton vrai lien de profil */}
           <a
-            href="https://facebook.com"
+            href="https://www.facebook.com/profile.php?id=61580115693070"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-3 rounded-xl2 border border-ink/10 bg-white/60 px-4 py-3.5 text-sm text-ink/80 backdrop-blur-sm transition-colors hover:border-electric/30 hover:text-electric dark:border-white/10 dark:bg-white/5 dark:text-paper/80"
           >
             <Facebook className="h-4 w-4 shrink-0 text-electric" />
-            Caleb Agk — Facebook
+            facebook.com/profile.php?id=61580115693070
           </a>
 
-          {/* Ligne TikTok ajoutée à part, juste en dessous */}
+          {/* TikTok épuré avec ton vrai lien de profil */}
           <a
-            href="https://tiktok.com"
+            href="https://tiktok.com/@calebagk"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-3 rounded-xl2 border border-ink/10 bg-white/60 px-4 py-3.5 text-sm text-ink/80 backdrop-blur-sm transition-colors hover:border-electric/30 hover:text-electric dark:border-white/10 dark:bg-white/5 dark:text-paper/80"
           >
-            {/* SVG TikTok personnalisé pour correspondre parfaitement aux autres icônes Lucide */}
             <svg
               className="h-4 w-4 shrink-0 text-electric"
               viewBox="0 0 24 24"
@@ -87,7 +86,7 @@ export default function ContactSection() {
             >
               <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
             </svg>
-            Caleb Agk — TikTok
+            tiktok.com/@calebagk
           </a>
         </div>
 
