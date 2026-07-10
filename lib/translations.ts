@@ -74,31 +74,11 @@ export const translations = {
       badge: 'FAQ',
       title: 'Questions fréquentes.',
       items: [
-        {
-          question: 'Quels services proposez-vous ?',
-          answer:
-            "Création de contenu, d'images et de vidéos IA, motion design, montage vidéo professionnel, création d'affiches et de logos, retouche photo avec IA, prompt engineering, ainsi que du conseil en solutions créatives IA.",
-        },
-        {
-          question: 'Combien de temps dure un projet ?',
-          answer:
-            'La durée varie selon la nature et la complexité du projet. Elle est définie ensemble dès le premier échange, pour respecter vos délais.',
-        },
-        {
-          question: 'Travaillez-vous à distance ?',
-          answer:
-            'Oui, tous les projets peuvent être menés entièrement à distance, où que vous soyez.',
-        },
-        {
-          question: 'Comment passer commande ?',
-          answer:
-            "Il suffit de me contacter via WhatsApp, le formulaire de contact ou par email pour décrire votre besoin. Je reviens rapidement vers vous avec une proposition adaptée.",
-        },
-        {
-          question: 'Quels moyens de paiement acceptez-vous ?',
-          answer:
-            'Les moyens de paiement disponibles (Mobile Money, virement, espèces...) vous seront précisés lors de la mise en place de votre commande.',
-        },
+        { question: 'Quels services proposez-vous ?', answer: "Création de contenu, d'images et de vidéos IA, motion design, montage vidéo professionnel, création d'affiches et de logos, retouche photo avec IA, prompt engineering, ainsi que du conseil en solutions créatives IA." },
+        { question: 'Combien de temps dure un projet ?', answer: 'La durée varie selon la nature et la complexité du projet. Elle est définie ensemble dès le premier échange, pour respecter vos délais.' },
+        { question: 'Travaillez-vous à distance ?', answer: 'Oui, tous les projets peuvent être menés entièrement à distance, où que vous soyez.' },
+        { question: 'Comment passer commande ?', answer: "Il suffit de me contacter via WhatsApp, le formulaire de contact ou par email pour décrire votre besoin. Je reviens rapidement vers vous avec une proposition adaptée." },
+        { question: 'Quels moyens de paiement acceptez-vous ?', answer: 'Les moyens de paiement disponibles (Mobile Money, virement, espèces...) vous seront précisés lors de la mise en place de votre commande.' },
       ],
     },
     contact: {
@@ -119,6 +99,13 @@ export const translations = {
       submit: 'Publier',
       sending: 'Envoi...',
       empty: 'Aucun commentaire pour le moment. Soyez le premier !',
+    },
+    assistant: {
+      title: 'Assistant Caleb Creative',
+      placeholder: 'Posez votre question...',
+      welcome:
+        "Bonjour ! Je suis l'assistant de Caleb Creative. Je peux vous guider sur les services, répondre à vos questions ou vous orienter vers WhatsApp. Comment puis-je vous aider ?",
+      error: "Une erreur est survenue, réessayez.",
     },
   },
   en: {
@@ -193,30 +180,11 @@ export const translations = {
       badge: 'FAQ',
       title: 'Frequently asked questions.',
       items: [
-        {
-          question: 'What services do you offer?',
-          answer:
-            'AI content, image and video creation, motion design, professional video editing, poster and logo creation, AI photo retouching, prompt engineering, and AI creative solutions consulting.',
-        },
-        {
-          question: 'How long does a project take?',
-          answer:
-            'It depends on the nature and complexity of the project. Timelines are set together from our first conversation, to fit your deadlines.',
-        },
-        {
-          question: 'Do you work remotely?',
-          answer: 'Yes, every project can be handled entirely remotely, wherever you are.',
-        },
-        {
-          question: 'How do I place an order?',
-          answer:
-            'Just reach out via WhatsApp, the contact form, or email to describe your needs. I get back to you quickly with a tailored proposal.',
-        },
-        {
-          question: 'What payment methods do you accept?',
-          answer:
-            'Available payment methods (Mobile Money, bank transfer, cash...) will be confirmed with you when setting up your order.',
-        },
+        { question: 'What services do you offer?', answer: 'AI content, image and video creation, motion design, professional video editing, poster and logo creation, AI photo retouching, prompt engineering, and AI creative solutions consulting.' },
+        { question: 'How long does a project take?', answer: 'It depends on the nature and complexity of the project. Timelines are set together from our first conversation, to fit your deadlines.' },
+        { question: 'Do you work remotely?', answer: 'Yes, every project can be handled entirely remotely, wherever you are.' },
+        { question: 'How do I place an order?', answer: 'Just reach out via WhatsApp, the contact form, or email to describe your needs. I get back to you quickly with a tailored proposal.' },
+        { question: 'What payment methods do you accept?', answer: 'Available payment methods (Mobile Money, bank transfer, cash...) will be confirmed with you when setting up your order.' },
       ],
     },
     contact: {
@@ -238,8 +206,14 @@ export const translations = {
       sending: 'Sending...',
       empty: 'No comments yet. Be the first!',
     },
+    assistant: {
+      title: 'Caleb Creative Assistant',
+      placeholder: 'Ask a question...',
+      welcome:
+        "Hi! I'm the Caleb Creative assistant. I can guide you through the services, answer your questions, or point you to WhatsApp. How can I help?",
+      error: 'Something went wrong, please try again.',
+    },
   },
 } as const;
 
 export type Lang = keyof typeof translations;
-    
