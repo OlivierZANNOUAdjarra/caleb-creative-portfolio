@@ -22,7 +22,7 @@ export const translations = {
       title:
         "Passionné par la création visuelle, augmenté par l'intelligence artificielle.",
       paragraph1:
-        "Depuis près de deux ans, Caleb Jesugnon AGBAKOU met la puissance de l'intelligence artificielle au service de la créativité, pour transformer les idées en réalisations concrètes — qu'il s'agisse d'images, de vidéos, de designs ou d'identités visuelles.",
+        "Depuis près de deux ans, Caleb Jesugnon AGBAKOU met la puissance de l'intelligence artificielle au service de la créativité, pour transformer les idées en réalisations concrètes qu'il s'agisse d'images, de vidéos, de designs ou d'identités visuelles.",
       paragraph2:
         'Créatif, innovant et attentif aux détails, il accompagne particuliers, entreprises et organisations dans la conception de contenus visuels uniques.',
       missionLabel: 'Mission',
