@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { MessageCircle, ArrowRight, Sparkles } from 'lucide-react';
+import { ArrowRight, Sparkles } from 'lucide-react';
 import { useLanguage } from '@/lib/language-context';
 import AboutSection from '@/components/AboutSection';
 import ServicesSection from '@/components/ServicesSection';
@@ -11,9 +11,12 @@ import ToolsSection from '@/components/ToolsSection';
 import FaqSection from '@/components/FaqSection';
 import ContactSection from '@/components/ContactSection';
 import CommentsSection from '@/components/CommentsSection';
+import WhatsAppIcon from '@/components/WhatsAppIcon';
 
 const WHATSAPP_NUMBER = '22901481395395';
-const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}`;
+const WHATSAPP_MESSAGE =
+  "Bonjour Caleb ! Je découvre votre portfolio Caleb Creative et j'aimerais échanger sur un projet.";
+const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -84,8 +87,8 @@ export default function Home() {
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 rounded-full border border-ink/15 bg-paper px-6 py-3.5 font-body text-sm font-medium text-ink transition-transform hover:-translate-y-0.5 hover:border-electric/40 hover:text-electric dark:border-white/15 dark:bg-transparent dark:text-paper"
             >
-              <MessageCircle className="h-4 w-4" />
-              {t.hero.ctaNavigation || t.hero.ctaWhatsapp}
+              <WhatsAppIcon className="h-4 w-4" />
+              {t.hero.ctaWhatsapp}
             </a>
 
             <a
@@ -133,7 +136,7 @@ export default function Home() {
         aria-label="Contacter Caleb Creative sur WhatsApp"
         className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg shadow-black/20 transition-transform hover:scale-110"
       >
-        <MessageCircle className="h-6 w-6" />
+        <WhatsAppIcon className="h-7 w-7" />
       </a>
     </main>
   );
