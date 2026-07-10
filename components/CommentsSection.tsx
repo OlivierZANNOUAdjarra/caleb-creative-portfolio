@@ -1,11 +1,11 @@
 import { cookies } from 'next/headers';
-import { getApprovedComments } from '@/app/actions/comments';
+import { getApprovedComments, type Comment } from '@/app/actions/comments';
 import CommentForm from '@/components/CommentForm';
 import { translations, Lang } from '@/lib/translations';
 import { MessageSquareText } from 'lucide-react';
 
 export default async function CommentsSection() {
-  const comments = await getApprovedComments();
+  const comments: Comment[] = await getApprovedComments();
   const langCookie = cookies().get('cc-lang')?.value as Lang | undefined;
   const t = translations[langCookie === 'en' ? 'en' : 'fr'].comments;
 
