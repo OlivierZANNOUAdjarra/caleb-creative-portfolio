@@ -1,4 +1,5 @@
 import HeroSection from '@/components/HeroSection';
+import StatsCounter from '@/components/StatsCounter';
 import AboutSection from '@/components/AboutSection';
 import ServicesSection from '@/components/ServicesSection';
 import PortfolioSection from '@/components/PortfolioSection';
@@ -11,6 +12,7 @@ export default function Home() {
   return (
     <main className="relative">
       <HeroSection />
+      <StatsCounter />
       <AboutSection />
       <ServicesSection />
       <PortfolioSection />
