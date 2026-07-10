@@ -1,3 +1,4 @@
+import ScrollProgress from '@/components/ScrollProgress';
 import type { Metadata } from 'next';
 import AIAssistant from '@/components/AIAssistant';
 import { Space_Grotesk, Inter } from 'next/font/google';
@@ -89,6 +90,7 @@ export default function RootLayout({
               aria-hidden
               className="pointer-events-none fixed inset-0 -z-10 bg-aurora-gradient opacity-100 dark:opacity-20"
             />
+<ScrollProgress />
             <SiteControls />
             <AIAssistant />
             {children}
