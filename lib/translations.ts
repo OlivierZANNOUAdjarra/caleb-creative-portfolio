@@ -107,6 +107,12 @@ export const translations = {
         "Bonjour ! Je suis l'assistant de Caleb Creative. Je peux vous guider sur les services, répondre à vos questions ou vous orienter vers WhatsApp. Comment puis-je vous aider ?",
       error: "Une erreur est survenue, réessayez.",
     },
+    stats: {
+      projects: 'Projets réalisés',
+      clients: 'Clients satisfaits',
+      tools: 'Outils IA maîtrisés',
+      experience: "Années d'expérience",
+    },
   },
   en: {
     nav: {
@@ -184,7 +190,8 @@ export const translations = {
         { question: 'How long does a project take?', answer: 'It depends on the nature and complexity of the project. Timelines are set together from our first conversation, to fit your deadlines.' },
         { question: 'Do you work remotely?', answer: 'Yes, every project can be handled entirely remotely, wherever you are.' },
         { question: 'How do I place an order?', answer: 'Just reach out via WhatsApp, the contact form, or email to describe your needs. I get back to you quickly with a tailored proposal.' },
-        { question: 'What payment methods do you accept?', answer: 'Available payment methods (Mobile Money, bank transfer, cash...) will be confirmed with you when setting up your order.' },
+        { question: 'What payment methods do you accept?', answer: 'Available payment methods (Mobile Money, bank transfer, cash...) will be confirmed with you when setting up your order.',
+        },
       ],
     },
     contact: {
@@ -212,6 +219,12 @@ export const translations = {
       welcome:
         "Hi! I'm the Caleb Creative assistant. I can guide you through the services, answer your questions, or point you to WhatsApp. How can I help?",
       error: 'Something went wrong, please try again.',
+    },
+    stats: {
+      projects: 'Completed projects',
+      clients: 'Happy clients',
+      tools: 'AI tools mastered',
+      experience: 'Years of experience',
     },
   },
 } as const;
