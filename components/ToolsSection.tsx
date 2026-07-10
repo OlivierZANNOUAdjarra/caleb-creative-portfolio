@@ -32,7 +32,7 @@ function LogoGrid({ names, slugs }: { names: readonly string[]; slugs: string[] 
         >
           <div className="relative h-10 w-10 shrink-0">
             <Image
-              src={`/logos/${slugs[i]}.png`}
+              src={`/${slugs[i]}.png`}
               alt={name}
               fill
               sizes="40px"
