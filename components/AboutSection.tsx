@@ -1,9 +1,8 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Sparkles, Users } from 'lucide-react';
+import { Sparkles, Users, Target, MoveUpRight } from 'lucide-react';
 import { useLanguage } from '@/lib/language-context';
-import Image from 'next/image'; // Importation du composant Image de Next.js
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -68,16 +67,10 @@ export default function AboutSection() {
           className="flex flex-col gap-5 rounded-xl2 border border-ink/10 bg-white/60 p-6 shadow-sm shadow-ink/5 backdrop-blur-sm dark:border-white/10 dark:bg-white/5"
         >
           <div className="flex items-start gap-3">
-            {/* Remplacement de l'icône Lucide par l'image de la cible rouge */}
-            <div className="mt-0.5 h-6 w-6 shrink-0 relative flex items-center justify-center">
-              <Image 
-                src="/mission-target.png" 
-                alt="Mission Target" 
-                width={24} 
-                height={24}
-                className="object-contain"
-                priority
-              />
+            {/* Icône "cible" rouge avec flèche, comme demandé */}
+            <div className="relative mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-red-500/10">
+              <Target className="h-5 w-5 text-red-500" />
+              <MoveUpRight className="absolute -right-1 -top-1 h-3.5 w-3.5 text-red-500" strokeWidth={3} />
             </div>
             <div>
               <p className="font-display text-sm font-semibold uppercase tracking-wide text-ink dark:text-paper">
@@ -96,7 +89,7 @@ export default function AboutSection() {
                 {a.audienceLabel}
               </p>
               <div className="mt-2 flex flex-wrap gap-2">
-                {a.audiences.map((aud: string) => (
+                {a.audiences.map((aud) => (
                   <span
                     key={aud}
                     className="rounded-full bg-signal/10 px-3 py-1 text-xs font-medium text-signal"
