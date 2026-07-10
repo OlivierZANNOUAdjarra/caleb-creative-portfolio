@@ -5,7 +5,7 @@ import { translations, Lang } from '@/lib/translations';
 
 const LanguageContext = createContext<{
   lang: Lang;
-  t: any; // Utilisation de any ici pour assouplir la vérification stricte des textes littéraux
+  t: typeof translations['fr'];
   toggleLang: () => void;
 }>({ lang: 'fr', t: translations.fr, toggleLang: () => {} });
 
@@ -21,13 +21,13 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     setLang((prev) => {
       const next: Lang = prev === 'fr' ? 'en' : 'fr';
       localStorage.setItem('cc-lang', next);
+      document.cookie = `cc-lang=${next}; path=/; max-age=31536000`;
       return next;
     });
   }
 
   return (
-    // Ajout de "as any" pour forcer TypeScript à accepter le dictionnaire de la langue active
-    <LanguageContext.Provider value={{ lang, t: translations[lang] as any, toggleLang }}>
+    <LanguageContext.Provider value={{ lang, t: translations[lang], toggleLang }}>
       {children}
     </LanguageContext.Provider>
   );
