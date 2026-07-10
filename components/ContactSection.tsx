@@ -57,6 +57,7 @@ export default function ContactSection() {
             );
           })}
 
+          {/* Ligne Facebook uniquement */}
           <a
             href="https://facebook.com"
             target="_blank"
@@ -64,7 +65,29 @@ export default function ContactSection() {
             className="flex items-center gap-3 rounded-xl2 border border-ink/10 bg-white/60 px-4 py-3.5 text-sm text-ink/80 backdrop-blur-sm transition-colors hover:border-electric/30 hover:text-electric dark:border-white/10 dark:bg-white/5 dark:text-paper/80"
           >
             <Facebook className="h-4 w-4 shrink-0 text-electric" />
-            Caleb Agk — Facebook &amp; TikTok
+            Caleb Agk — Facebook
+          </a>
+
+          {/* Ligne TikTok ajoutée à part, juste en dessous */}
+          <a
+            href="https://tiktok.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-3 rounded-xl2 border border-ink/10 bg-white/60 px-4 py-3.5 text-sm text-ink/80 backdrop-blur-sm transition-colors hover:border-electric/30 hover:text-electric dark:border-white/10 dark:bg-white/5 dark:text-paper/80"
+          >
+            {/* SVG TikTok personnalisé pour correspondre parfaitement aux autres icônes Lucide */}
+            <svg
+              className="h-4 w-4 shrink-0 text-electric"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
+            </svg>
+            Caleb Agk — TikTok
           </a>
         </div>
 
@@ -147,4 +170,4 @@ export default function ContactSection() {
       </div>
     </section>
   );
-        }
+}
