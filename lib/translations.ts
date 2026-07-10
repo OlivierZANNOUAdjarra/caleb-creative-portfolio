@@ -136,7 +136,7 @@ export const translations = {
       badge: 'About',
       title: 'Passionate about visual creation, enhanced by artificial intelligence.',
       paragraph1:
-        "For nearly two years, Caleb Jesugnon AGBAKOU has put the power of artificial intelligence at the service of creativity, turning ideas into concrete results — whether images, videos, designs, or visual identities.",
+        "For nearly two years, Caleb Jesugnon AGBAKOU has put the power of artificial intelligence at the service of creativity, turning ideas into concrete results  whether images, videos, designs, or visual identities.",
       paragraph2:
         'Creative, innovative and detail-oriented, he supports individuals, businesses and organizations in creating unique visual content.',
       missionLabel: 'Mission',
