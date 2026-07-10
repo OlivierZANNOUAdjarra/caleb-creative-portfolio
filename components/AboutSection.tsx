@@ -1,8 +1,9 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Sparkles, Users, Target } from 'lucide-react';
+import { Sparkles, Users } from 'lucide-react';
 import { useLanguage } from '@/lib/language-context';
+import Image from 'next/image'; // Importation du composant Image de Next.js
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -67,7 +68,17 @@ export default function AboutSection() {
           className="flex flex-col gap-5 rounded-xl2 border border-ink/10 bg-white/60 p-6 shadow-sm shadow-ink/5 backdrop-blur-sm dark:border-white/10 dark:bg-white/5"
         >
           <div className="flex items-start gap-3">
-            <Target className="mt-1 h-5 w-5 shrink-0 text-electric" />
+            {/* Remplacement de l'icône Lucide par l'image de la cible rouge */}
+            <div className="mt-0.5 h-6 w-6 shrink-0 relative flex items-center justify-center">
+              <Image 
+                src="/mission-target.png" 
+                alt="Mission Target" 
+                width={24} 
+                height={24}
+                className="object-contain"
+                priority
+              />
+            </div>
             <div>
               <p className="font-display text-sm font-semibold uppercase tracking-wide text-ink dark:text-paper">
                 {a.missionLabel}
@@ -85,7 +96,6 @@ export default function AboutSection() {
                 {a.audienceLabel}
               </p>
               <div className="mt-2 flex flex-wrap gap-2">
-                {/* Ajout du type explicite (aud: string) ici pour corriger l'erreur de build */}
                 {a.audiences.map((aud: string) => (
                   <span
                     key={aud}
