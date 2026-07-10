@@ -68,7 +68,7 @@ export const translations = {
       softwareLabel: 'Logiciels',
       aiLabel: 'Intelligence artificielle',
       software: ['Adobe Photoshop', 'Adobe Premiere Pro', 'Adobe After Effects', 'CapCut', 'Canva'],
-      aiTools: ['ChatGPT', 'Midjourney', 'Flux', 'Kling AI', 'Runway', 'Veo', 'Leonardo AI', 'Gemini', 'Ideogram'],
+      aiTools: ['ChatGPT', 'Midjourney', 'Bytedance Seedance', 'Kling AI', 'Claude AI', 'Leonardo AI', 'Gemini', 'Ideogram AI'],
     },
     faq: {
       badge: 'FAQ',
@@ -174,7 +174,7 @@ export const translations = {
       softwareLabel: 'Software',
       aiLabel: 'Artificial intelligence',
       software: ['Adobe Photoshop', 'Adobe Premiere Pro', 'Adobe After Effects', 'CapCut', 'Canva'],
-      aiTools: ['ChatGPT', 'Midjourney', 'Flux', 'Kling AI', 'Runway', 'Veo', 'Leonardo AI', 'Gemini', 'Ideogram'],
+      aiTools: ['ChatGPT', 'Midjourney', 'Bytedance Seedance', 'Kling AI', 'Claude AI', 'Leonardo AI', 'Gemini', 'Ideogram AI'],
     },
     faq: {
       badge: 'FAQ',
