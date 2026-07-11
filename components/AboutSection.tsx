@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Sparkles, Users } from 'lucide-react';
+import { Sparkles, Users, Target, MoveUpRight } from 'lucide-react';
 import { useLanguage } from '@/lib/language-context';
 
 const fadeUp = {
@@ -64,25 +64,36 @@ export default function AboutSection() {
           viewport={{ once: true, amount: 0.3 }}
           custom={0.3}
           variants={fadeUp}
-          className="flex flex-col gap-5 rounded-xl2 border border-ink/10 bg-white/60 p-6 shadow-sm shadow-ink/5 backdrop-blur-sm dark:border-white/10 dark:bg-white/5"
+          className="flex flex-col gap-5 overflow-hidden rounded-xl2 border border-ink/10 p-6 shadow-sm shadow-ink/5 dark:border-white/10"
         >
-          <div className="flex items-start gap-3">
-            {/* Conteneur circulaire de taille h-12 w-12 avec le lien d'image direct */}
-            <div className="mt-0.5 h-12 w-12 shrink-0 overflow-hidden rounded-full border border-ink/5 bg-white shadow-sm dark:border-white/10 dark:bg-white/5 flex items-center justify-center p-1">
-              <img 
-                src="https://cdn-icons-png.flaticon.com/512/4887/4887265.png" 
-                alt="Mission Target Icon" 
-                className="h-full w-full object-contain p-0.5"
-                loading="lazy"
-              />
-            </div>
-            <div>
-              <p className="font-display text-sm font-semibold uppercase tracking-wide text-ink dark:text-paper">
-                {a.missionLabel}
-              </p>
-              <p className="mt-1 text-sm text-ink/70 dark:text-paper/70">
-                {a.missionText}
-              </p>
+          {/* Carte Mission : dégradés radiaux teal (haut-gauche) + violet (bas-droite), comme demandé */}
+          <div className="relative -m-6 mb-0 overflow-hidden p-6">
+            <div
+              aria-hidden
+              className="absolute inset-0 -z-10"
+              style={{
+                background:
+                  'radial-gradient(120% 140% at 0% 0%, rgba(14,163,148,0.14), transparent 55%), radial-gradient(120% 140% at 100% 0%, rgba(124,58,237,0.12), transparent 55%)',
+              }}
+            />
+            {/* Liseré vertical multicolore à gauche */}
+            <div
+              aria-hidden
+              className="absolute bottom-0 left-0 top-0 w-1 bg-gradient-to-b from-electric via-signal to-glow"
+            />
+            <div className="flex items-start gap-3">
+              <div className="relative mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-red-500/10">
+                <Target className="h-5 w-5 text-red-500" />
+                <MoveUpRight className="absolute -right-1 -top-1 h-3.5 w-3.5 text-red-500" strokeWidth={3} />
+              </div>
+              <div>
+                <p className="font-display text-sm font-semibold uppercase tracking-wide text-ink dark:text-paper">
+                  {a.missionLabel}
+                </p>
+                <p className="mt-1 text-sm text-ink/70 dark:text-paper/70">
+                  {a.missionText}
+                </p>
+              </div>
             </div>
           </div>
 
