@@ -9,7 +9,7 @@ import { useLanguage } from '@/lib/language-context';
 import WhatsAppIcon from '@/components/WhatsAppIcon';
 
 const WHATSAPP_LINK =
-  'https://wa.me/22901481395395?text=' +
+  'https://wa.me/2290148135395?text=' +
   encodeURIComponent(
     "Bonjour Caleb ! Je découvre votre portfolio Caleb Creative et j'aimerais échanger sur un projet."
   );
@@ -28,6 +28,13 @@ export default function SiteHeader() {
     onScroll();
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
 
   const links = [
     { id: 'a-propos', label: t.nav.about, idx: '01' },
@@ -75,11 +82,16 @@ export default function SiteHeader() {
             {theme === 'light' ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
           </button>
           <button
-            onClick={() => setIsOpen(true)}
-            aria-label="Ouvrir le menu"
-            className="flex h-[38px] w-[38px] items-center justify-center rounded-[10px] border border-ink/10 bg-white/60 text-ink transition-colors hover:border-electric dark:border-white/10 dark:bg-white/5 dark:text-paper"
+            onClick={() => setIsOpen((v) => !v)}
+            aria-label={isOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
+            aria-expanded={isOpen}
+            className={`flex h-[38px] w-[38px] items-center justify-center rounded-[10px] border transition-colors ${
+              isOpen
+                ? 'border-electric text-electric'
+                : 'border-ink/10 bg-white/60 text-ink hover:border-electric dark:border-white/10 dark:bg-white/5 dark:text-paper'
+            }`}
           >
-            <Menu className="h-4.5 w-4.5" />
+            {isOpen ? <X className="h-4.5 w-4.5" /> : <Menu className="h-4.5 w-4.5" />}
           </button>
         </div>
       </header>
@@ -90,7 +102,7 @@ export default function SiteHeader() {
             initial={{ opacity: 0, y: -14 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -14 }}
-            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
             className="fixed inset-0 top-0 z-[190] flex flex-col justify-center bg-aurora-gradient bg-ink px-8 py-16 dark:bg-[#0F1416] sm:px-24"
           >
             <button
@@ -109,11 +121,11 @@ export default function SiteHeader() {
                   onClick={() => setIsOpen(false)}
                   initial={{ opacity: 0, y: 14 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 + i * 0.06 }}
-                  className="flex items-center justify-between border-b border-white/10 py-4 font-display text-3xl font-semibold text-white transition-colors hover:text-electric sm:text-5xl"
+                  transition={{ delay: 0.08 + i * 0.05 }}
+                  className="flex items-center justify-between border-b border-white/10 py-3.5 font-display text-xl font-semibold text-white transition-colors hover:text-electric sm:text-2xl"
                 >
                   <span>{link.label}</span>
-                  <span className="font-mono text-xs font-normal text-glow">{link.idx}</span>
+                  <span className="font-mono text-[11px] font-normal text-glow">{link.idx}</span>
                 </motion.a>
               ))}
             </div>
@@ -121,7 +133,7 @@ export default function SiteHeader() {
             <motion.div
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 + links.length * 0.06 }}
+              transition={{ delay: 0.08 + links.length * 0.05 }}
               className="mt-10 flex items-center justify-between"
             >
               <span className="font-mono text-xs text-white/50">Abomey, Bénin</span>
