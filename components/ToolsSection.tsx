@@ -6,7 +6,7 @@ import { Wrench, Cpu } from 'lucide-react';
 import { useLanguage } from '@/lib/language-context';
 import FloatingToolIcons from '@/components/FloatingToolIcons';
 
-// Correspondance stricte : Nom de l'outil -> Nom du fichier dans public/tools/
+// Correspondance stricte : Nom de l'outil -> Nom exact du fichier dans le dossier public
 const TOOL_IMAGES: Record<string, string> = {
   // Logiciels
   'CapCut': 'capcut.png',
@@ -31,7 +31,7 @@ const fadeUp = {
 };
 
 function ToolCard({ name, delay }: { name: string; delay: number }) {
-  // On récupère le nom du fichier image associé au nom de l'outil
+  // On récupère le nom du fichier image associé à l'outil
   const imageFileName = TOOL_IMAGES[name];
 
   return (
@@ -46,7 +46,7 @@ function ToolCard({ name, delay }: { name: string; delay: number }) {
       <div className="relative flex h-10 w-10 shrink-0 items-center justify-center">
         {imageFileName ? (
           <Image
-            src={`/tools/${imageFileName}`}
+            src={`/${imageFileName}`}
             alt={name}
             width={40}
             height={40}
@@ -54,7 +54,7 @@ function ToolCard({ name, delay }: { name: string; delay: number }) {
             loading="lazy"
           />
         ) : (
-          /* Lettre par défaut si l'image n'est pas trouvée ou pas encore ajoutée */
+          /* Lettre par défaut si l'image n'est pas trouvée dans la liste au-dessus */
           <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-electric to-signal font-display text-sm font-bold text-white">
             {name.charAt(0)}
           </div>
