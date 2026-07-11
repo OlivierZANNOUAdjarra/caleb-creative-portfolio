@@ -6,23 +6,28 @@ import { Wrench, Cpu } from 'lucide-react';
 import { useLanguage } from '@/lib/language-context';
 import FloatingToolIcons from '@/components/FloatingToolIcons';
 
-// Correspondance stricte : Nom de l'outil -> Nom exact du fichier dans le dossier public
+// ASSOCIATION PRECISE : Nom affiché -> Nom du fichier dans public/
 const TOOL_IMAGES: Record<string, string> = {
   // Logiciels
-  'CapCut': 'capcut.png',
+  "Adobe Photoshop": "photoshop.png",
+  "Adobe Premiere Pro": "premiere.png",
+  "Adobe After Effects": "aftereffects.png",
+  "CapCut": "capcut.png",
+  "Canva": "canva.png",
   
-  // Intelligences Artificielles
-  'OpenAI': 'openai.png',
-  'Midjourney': 'midjourney.png',
-  'Flux': 'flux.png',
-  'Kling': 'kling.png',
-  'Runway': 'runway.png',
-  'Gemini': 'gemini.png',
-  'Ideogram': 'ideogram.png',
+  // Intelligence Artificielle (selon votre image)
+  "ChatGPT": "chatgpt.png",
+  "Midjourney": "midjourney.png",
+  "Bytedance Seedance": "seedance.png",
+  "Kling AI": "kling.png",
+  "Claude AI": "claude.png",
+  "Leonardo AI": "leonardo.png",
+  "Gemini": "gemini.png",
+  "Ideogram": "ideogram.png",
 };
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 0, y: 30 },
   show: (delay: number) => ({
     opacity: 1,
     y: 0,
@@ -31,93 +36,95 @@ const fadeUp = {
 };
 
 function ToolCard({ name, delay }: { name: string; delay: number }) {
-  // On récupère le nom du fichier image associé à l'outil
   const imageFileName = TOOL_IMAGES[name];
 
   return (
     <motion.div
       initial="hidden"
       whileInView="show"
-      viewport={{ once: true, amount: 0.4 }}
+      viewport={{ once: true, amount: 0.2 }}
       custom={delay}
       variants={fadeUp}
-      className="group relative z-10 flex flex-col items-center gap-3 rounded-xl2 border border-ink/10 bg-white/70 p-5 text-center backdrop-blur-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-electric/30 hover:shadow-lg hover:shadow-electric/10 dark:border-white/10 dark:bg-white/5"
+      className="group relative flex flex-col items-center justify-center rounded-[2.5rem] border border-white/40 bg-white/80 p-8 shadow-xl shadow-black/[0.03] backdrop-blur-md transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-electric/10 dark:border-white/10 dark:bg-white/5 dark:shadow-none"
     >
-      <div className="relative flex h-10 w-10 shrink-0 items-center justify-center">
+      <div className="relative mb-4 flex h-20 w-20 items-center justify-center overflow-hidden rounded-2xl bg-white shadow-inner dark:bg-white/10">
         {imageFileName ? (
           <Image
             src={`/${imageFileName}`}
             alt={name}
-            width={40}
-            height={40}
-            className="object-contain"
-            loading="lazy"
+            width={56}
+            height={56}
+            className="h-14 w-14 object-contain transition-transform duration-500 group-hover:scale-110"
           />
         ) : (
-          /* Lettre par défaut si l'image n'est pas trouvée dans la liste au-dessus */
-          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-electric to-signal font-display text-sm font-bold text-white">
+          /* Avatar de secours avec dégradé si l'image est manquante */
+          <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-electric/80 to-signal/80 text-2xl font-bold text-white">
             {name.charAt(0)}
           </div>
         )}
       </div>
-      <span className="text-xs font-medium text-ink/70 dark:text-paper/70">{name}</span>
+      
+      <p className="text-center font-display text-sm font-semibold tracking-tight text-ink/80 dark:text-paper/90">
+        {name}
+      </p>
     </motion.div>
   );
 }
 
 export default function ToolsSection() {
   const { t } = useLanguage();
-  const tl = t.tools;
+  
+  // Listes basées sur vos besoins
+  const softwareList = ["Adobe Photoshop", "Adobe Premiere Pro", "Adobe After Effects", "CapCut", "Canva"];
+  const aiList = ["ChatGPT", "Midjourney", "Bytedance Seedance", "Kling AI", "Claude AI", "Leonardo AI", "Gemini", "Ideogram"];
 
   return (
-    <section id="outils" className="relative mx-auto max-w-5xl overflow-hidden px-6 py-24 sm:px-10">
+    <section id="outils" className="relative mx-auto max-w-6xl overflow-hidden px-6 py-24 sm:px-10">
       <FloatingToolIcons />
 
-      <motion.p
+      <motion.div
         initial="hidden"
         whileInView="show"
-        viewport={{ once: true, amount: 0.4 }}
-        custom={0}
-        variants={fadeUp}
-        className="relative z-10 inline-flex items-center gap-2 font-display text-xs font-medium uppercase tracking-[0.2em] text-electric"
+        viewport={{ once: true }}
+        className="relative z-10 mb-16 text-center"
       >
-        <Wrench className="h-3.5 w-3.5" />
-        {tl.badge}
-      </motion.p>
+        <p className="inline-flex items-center gap-2 font-display text-xs font-bold uppercase tracking-[0.3em] text-electric">
+          <Wrench className="h-3 w-3" />
+          Mon Arsenal
+        </p>
+        <h2 className="mt-4 font-display text-3xl font-bold tracking-tight text-ink sm:text-5xl dark:text-paper">
+          Outils & Technologies
+        </h2>
+      </motion.div>
 
-      <motion.h2
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, amount: 0.4 }}
-        custom={0.1}
-        variants={fadeUp}
-        className="relative z-10 mt-4 max-w-2xl font-display text-2xl font-semibold text-balance text-ink sm:text-3xl lg:text-4xl dark:text-paper"
-      >
-        {tl.title}
-      </motion.h2>
-
-      <div className="relative z-10 mt-12 space-y-12">
-        {/* Grille des Logiciels */}
+      <div className="relative z-10 space-y-20">
+        {/* SECTION LOGICIELS */}
         <div>
-          <p className="mb-4 font-display text-sm font-semibold uppercase tracking-wide text-ink/60 dark:text-paper/60">
-            {tl.softwareLabel}
-          </p>
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
-            {tl.software.map((name, i) => (
-              <ToolCard key={name} name={name} delay={0.05 * i} />
+          <div className="mb-8 flex items-center gap-4">
+            <h3 className="font-display text-sm font-black uppercase tracking-widest text-ink/40 dark:text-paper/40">
+              Logiciels de Création
+            </h3>
+            <div className="h-px flex-1 bg-gradient-to-r from-ink/10 to-transparent dark:from-paper/10" />
+          </div>
+          <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-5">
+            {softwareList.map((name, i) => (
+              <ToolCard key={name} name={name} delay={i * 0.05} />
             ))}
           </div>
         </div>
 
-        {/* Grille des IA */}
+        {/* SECTION INTELLIGENCE ARTIFICIELLE */}
         <div>
-          <p className="mb-4 flex items-center gap-2 font-display text-sm font-semibold uppercase tracking-wide text-ink/60 dark:text-paper/60">
-            <Cpu className="h-4 w-4" />
-            {tl.aiLabel}
-          </p>
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
-            {tl.aiTools.map((name, i) => (
-              <ToolCard key={name} name={name} delay={0.05 * i} />
+          <div className="mb-8 flex items-center gap-4">
+            <h3 className="flex items-center gap-2 font-display text-sm font-black uppercase tracking-widest text-ink/40 dark:text-paper/40">
+              <Cpu className="h-4 w-4 text-electric" />
+              Intelligence Artificielle
+            </h3>
+            <div className="h-px flex-1 bg-gradient-to-r from-ink/10 to-transparent dark:from-paper/10" />
+          </div>
+          <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4">
+            {aiList.map((name, i) => (
+              <ToolCard key={name} name={name} delay={i * 0.05} />
             ))}
           </div>
         </div>
