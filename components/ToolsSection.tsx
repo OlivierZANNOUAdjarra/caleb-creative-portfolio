@@ -1,22 +1,25 @@
 'use client';
 
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Wrench, Cpu } from 'lucide-react';
 import { useLanguage } from '@/lib/language-context';
 import FloatingToolIcons from '@/components/FloatingToolIcons';
 
-const SOFTWARE_LOGOS: (string | null)[] = [null, null, null, 'capcut', null];
-const AI_LOGOS: (string | null)[] = [
-  'openai',
-  'midjourney',
-  'flux',
-  'kling',
-  'runway',
-  null,
-  null,
-  'geminicli',
-  'ideogram',
-];
+// Correspondance stricte : Nom de l'outil -> Nom du fichier dans public/tools/
+const TOOL_IMAGES: Record<string, string> = {
+  // Logiciels
+  'CapCut': 'capcut.png',
+  
+  // Intelligences Artificielles
+  'OpenAI': 'openai.png',
+  'Midjourney': 'midjourney.png',
+  'Flux': 'flux.png',
+  'Kling': 'kling.png',
+  'Runway': 'runway.png',
+  'Gemini': 'gemini.png',
+  'Ideogram': 'ideogram.png',
+};
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -27,15 +30,10 @@ const fadeUp = {
   }),
 };
 
-function ToolCard({
-  name,
-  logoSlug,
-  delay,
-}: {
-  name: string;
-  logoSlug: string | null;
-  delay: number;
-}) {
+function ToolCard({ name, delay }: { name: string; delay: number }) {
+  // On récupère le nom du fichier image associé au nom de l'outil
+  const imageFileName = TOOL_IMAGES[name];
+
   return (
     <motion.div
       initial="hidden"
@@ -45,16 +43,18 @@ function ToolCard({
       variants={fadeUp}
       className="group relative z-10 flex flex-col items-center gap-3 rounded-xl2 border border-ink/10 bg-white/70 p-5 text-center backdrop-blur-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-electric/30 hover:shadow-lg hover:shadow-electric/10 dark:border-white/10 dark:bg-white/5"
     >
-      <div className="flex h-10 w-10 shrink-0 items-center justify-center">
-        {logoSlug ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={`https://unpkg.com/@lobehub/icons-static-svg@latest/icons/${logoSlug}.svg`}
+      <div className="relative flex h-10 w-10 shrink-0 items-center justify-center">
+        {imageFileName ? (
+          <Image
+            src={`/tools/${imageFileName}`}
             alt={name}
-            className="h-10 w-10 object-contain"
+            width={40}
+            height={40}
+            className="object-contain"
             loading="lazy"
           />
         ) : (
+          /* Lettre par défaut si l'image n'est pas trouvée ou pas encore ajoutée */
           <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-electric to-signal font-display text-sm font-bold text-white">
             {name.charAt(0)}
           </div>
@@ -62,16 +62,6 @@ function ToolCard({
       </div>
       <span className="text-xs font-medium text-ink/70 dark:text-paper/70">{name}</span>
     </motion.div>
-  );
-}
-
-function ToolGrid({ names, logos }: { names: readonly string[]; logos: (string | null)[] }) {
-  return (
-    <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
-      {names.map((name, i) => (
-        <ToolCard key={name} name={name} logoSlug={logos[i]} delay={0.05 * i} />
-      ))}
-    </div>
   );
 }
 
@@ -107,19 +97,29 @@ export default function ToolsSection() {
       </motion.h2>
 
       <div className="relative z-10 mt-12 space-y-12">
+        {/* Grille des Logiciels */}
         <div>
           <p className="mb-4 font-display text-sm font-semibold uppercase tracking-wide text-ink/60 dark:text-paper/60">
             {tl.softwareLabel}
           </p>
-          <ToolGrid names={tl.software} logos={SOFTWARE_LOGOS} />
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+            {tl.software.map((name, i) => (
+              <ToolCard key={name} name={name} delay={0.05 * i} />
+            ))}
+          </div>
         </div>
 
+        {/* Grille des IA */}
         <div>
           <p className="mb-4 flex items-center gap-2 font-display text-sm font-semibold uppercase tracking-wide text-ink/60 dark:text-paper/60">
             <Cpu className="h-4 w-4" />
             {tl.aiLabel}
           </p>
-          <ToolGrid names={tl.aiTools} logos={AI_LOGOS} />
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+            {tl.aiTools.map((name, i) => (
+              <ToolCard key={name} name={name} delay={0.05 * i} />
+            ))}
+          </div>
         </div>
       </div>
     </section>
