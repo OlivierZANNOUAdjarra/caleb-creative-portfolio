@@ -42,14 +42,16 @@
     text-wrap: balance;
   }
 
-  /* Animation de brillance transparente (demandée par le client) sur boutons/badges */
+  /* Animation de brillance transparente (badge "CALEB CREATIVE" + boutons) */
   .sheen-wrap {
     position: relative;
+    isolation: isolate;
     overflow: hidden;
   }
   .sheen-wrap::after {
     content: '';
     position: absolute;
+    z-index: 2;
     top: 0;
     left: -60%;
     width: 45%;
@@ -57,7 +59,7 @@
     background: linear-gradient(
       115deg,
       transparent,
-      rgba(255, 255, 255, 0.35),
+      rgba(255, 255, 255, 0.55),
       transparent
     );
     pointer-events: none;
