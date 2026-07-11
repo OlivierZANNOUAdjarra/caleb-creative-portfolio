@@ -26,7 +26,14 @@ export default async function CommentsSection() {
 
       <div className="mt-10 space-y-4">
         {comments.length === 0 ? (
-          <p className="text-sm text-ink/50 dark:text-paper/50">{t.empty}</p>
+          <div className="flex flex-col items-center gap-3.5 rounded-xl2 border border-dashed border-ink/20 px-6 py-11 text-center dark:border-white/20">
+            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-electric/10 text-electric">
+              <MessageSquareText className="h-5 w-5" />
+            </div>
+            <p className="max-w-xs text-sm leading-relaxed text-ink/60 dark:text-paper/60">
+              {t.empty}
+            </p>
+          </div>
         ) : (
           comments.map((c) => (
             <div
