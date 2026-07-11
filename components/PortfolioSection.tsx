@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ImageIcon } from 'lucide-react';
 import { useLanguage } from '@/lib/language-context';
@@ -15,6 +15,43 @@ const gradients = [
   'from-electric/30 to-signal/30',
 ];
 
+function TiltCard({
+  children,
+  onClick,
+}: {
+  children: React.ReactNode;
+  onClick: () => void;
+}) {
+  const ref = useRef<HTMLButtonElement>(null);
+  const [transform, setTransform] = useState('');
+
+  function handleMouseMove(e: React.MouseEvent<HTMLButtonElement>) {
+    const card = ref.current;
+    if (!card) return;
+    const r = card.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width - 0.5;
+    const y = (e.clientY - r.top) / r.height - 0.5;
+    setTransform(`translateY(-4px) rotateX(${(-y * 8).toFixed(2)}deg) rotateY(${(x * 8).toFixed(2)}deg)`);
+  }
+
+  function handleMouseLeave() {
+    setTransform('');
+  }
+
+  return (
+    <button
+      ref={ref}
+      onClick={onClick}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{ transform, transition: transform ? 'none' : 'transform .4s cubic-bezier(.16,.8,.24,1)' }}
+      className="group relative aspect-[4/3] overflow-hidden rounded-xl2 border border-ink/10 text-left shadow-sm shadow-ink/5 will-change-transform dark:border-white/10"
+    >
+      {children}
+    </button>
+  );
+}
+
 export default function PortfolioSection() {
   const { t } = useLanguage();
   const p = t.portfolio;
@@ -27,7 +64,11 @@ export default function PortfolioSection() {
     active === allLabel ? p.projects : p.projects.filter((proj) => proj.category === active);
 
   return (
-    <section id="portfolio" className="relative mx-auto max-w-6xl px-6 py-24 sm:px-10">
+    <section
+      id="portfolio"
+      className="relative mx-auto max-w-6xl px-6 py-24 sm:px-10"
+      style={{ perspective: '900px' }}
+    >
       <p className="inline-flex items-center gap-2 font-display text-xs font-medium uppercase tracking-[0.2em] text-electric">
         <ImageIcon className="h-3.5 w-3.5" />
         {p.badge}
@@ -56,29 +97,29 @@ export default function PortfolioSection() {
       <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         <AnimatePresence mode="popLayout">
           {filtered.map((project, i) => (
-            <motion.button
+            <motion.div
               key={project.title}
               layout
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.3 }}
-              onClick={() => setSelected(project)}
-              className="group relative aspect-[4/3] overflow-hidden rounded-xl2 border border-ink/10 text-left shadow-sm shadow-ink/5 dark:border-white/10"
             >
-              <div
-                className={`absolute inset-0 bg-gradient-to-br ${gradients[i % gradients.length]} transition-transform duration-500 group-hover:scale-110`}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/10 to-transparent" />
-              <div className="absolute bottom-0 left-0 right-0 p-4">
-                <p className="text-xs font-medium uppercase tracking-wide text-white/70">
-                  {project.category}
-                </p>
-                <p className="mt-1 font-display text-base font-semibold text-white">
-                  {project.title}
-                </p>
-              </div>
-            </motion.button>
+              <TiltCard onClick={() => setSelected(project)}>
+                <div
+                  className={`absolute inset-0 bg-gradient-to-br ${gradients[i % gradients.length]} transition-transform duration-500 group-hover:scale-110`}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/10 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-4">
+                  <p className="text-xs font-medium uppercase tracking-wide text-white/70">
+                    {project.category}
+                  </p>
+                  <p className="mt-1 font-display text-base font-semibold text-white">
+                    {project.title}
+                  </p>
+                </div>
+              </TiltCard>
+            </motion.div>
           ))}
         </AnimatePresence>
       </div>
@@ -128,4 +169,4 @@ export default function PortfolioSection() {
       </AnimatePresence>
     </section>
   );
-        }
+}
