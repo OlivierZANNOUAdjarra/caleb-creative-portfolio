@@ -17,16 +17,6 @@ export type Project = {
   created_at: string;
 };
 
-export const CATEGORY_OPTIONS = [
-  'Images IA',
-  'Vidéos IA',
-  'Publicités',
-  'Motion Design',
-  'Logos',
-  'Affiches',
-  'Retouches photo',
-] as const;
-
 function assertAdmin() {
   const token = cookies().get('cc_session')?.value;
   if (!verifySessionToken(token)) {
