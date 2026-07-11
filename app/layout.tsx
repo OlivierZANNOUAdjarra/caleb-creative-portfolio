@@ -1,16 +1,16 @@
-import ScrollProgress from '@/components/ScrollProgress';
 import type { Metadata } from 'next';
-import AIAssistant from '@/components/AIAssistant';
-import { Space_Grotesk, Inter } from 'next/font/google';
+import { Plus_Jakarta_Sans, Inter, IBM_Plex_Mono } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/lib/theme-context';
 import { LanguageProvider } from '@/lib/language-context';
-import SiteControls from '@/components/SiteControls';
-import WelcomeLoader from '@/components/WelcomeLoader'; // <-- 1. Importation du loader
+import ScrollProgress from '@/components/ScrollProgress';
+import SiteHeader from '@/components/SiteHeader';
+import AIAssistant from '@/components/AIAssistant';
+import WelcomeLoader from '@/components/WelcomeLoader';
 
-const display = Space_Grotesk({
+const display = Plus_Jakarta_Sans({
   subsets: ['latin'],
-  weight: ['500', '600', '700'],
+  weight: ['500', '600', '700', '800'],
   variable: '--font-display',
   display: 'swap',
 });
@@ -19,6 +19,13 @@ const body = Inter({
   subsets: ['latin'],
   weight: ['400', '500', '600'],
   variable: '--font-body',
+  display: 'swap',
+});
+
+const mono = IBM_Plex_Mono({
+  subsets: ['latin'],
+  weight: ['500', '600'],
+  variable: '--font-mono',
   display: 'swap',
 });
 
@@ -39,7 +46,7 @@ export const metadata: Metadata = {
     'motion design',
     'montage vidéo',
     'Midjourney',
-    'Claude AI',
+    'Runway',
     'création de logo',
   ],
   authors: [{ name: 'Caleb Jesugnon AGBAKOU' }],
@@ -79,19 +86,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="fr" className={`${display.variable} ${body.variable}`} suppressHydrationWarning>
-      <body className="relative min-h-screen overflow-x-hidden bg-paper font-body text-ink transition-colors dark:bg-[#09090b] dark:text-[#f4f4f5]">
-        {/* 2. Injection du loader au tout début de l'application */}
-        <WelcomeLoader />
-        
+    <html
+      lang="fr"
+      className={`${display.variable} ${body.variable} ${mono.variable}`}
+      suppressHydrationWarning
+    >
+      <body className="relative min-h-screen overflow-x-hidden bg-paper font-body text-ink transition-colors dark:bg-paper-dark dark:text-paper">
         <ThemeProvider>
           <LanguageProvider>
+            <WelcomeLoader />
             <div
               aria-hidden
-              className="pointer-events-none fixed inset-0 -z-10 bg-aurora-gradient opacity-100 dark:opacity-20"
+              className="pointer-events-none fixed inset-0 -z-10 bg-aurora-gradient"
             />
-<ScrollProgress />
-            <SiteControls />
+            <ScrollProgress />
+            <SiteHeader />
             <AIAssistant />
             {children}
           </LanguageProvider>
