@@ -1,10 +1,14 @@
 import { getAllComments } from '@/app/actions/comments';
+import { getAllProjects } from '@/app/actions/projects';
 import { logout } from '@/app/actions/auth';
 import DashboardCommentRow from '@/components/DashboardCommentRow';
+import DashboardProjectForm from '@/components/DashboardProjectForm';
+import DashboardProjectRow from '@/components/DashboardProjectRow';
 import { LogOut, LayoutDashboard } from 'lucide-react';
 
 export default async function DashboardPage() {
   const comments = await getAllComments();
+  const projects = await getAllProjects();
   const pending = comments.filter((c) => !c.approved);
   const approved = comments.filter((c) => c.approved);
 
@@ -30,7 +34,29 @@ export default async function DashboardPage() {
 
       <section className="mt-10">
         <h2 className="font-display text-sm font-semibold uppercase tracking-wide text-ink/60">
-          En attente de validation ({pending.length})
+          Ajouter une réalisation
+        </h2>
+        <div className="mt-4">
+          <DashboardProjectForm />
+        </div>
+      </section>
+
+      <section className="mt-10">
+        <h2 className="font-display text-sm font-semibold uppercase tracking-wide text-ink/60">
+          Réalisations en ligne ({projects.length})
+        </h2>
+        <div className="mt-4 space-y-3">
+          {projects.length === 0 ? (
+            <p className="text-sm text-ink/40">Aucune réalisation ajoutée pour le moment.</p>
+          ) : (
+            projects.map((p) => <DashboardProjectRow key={p.id} project={p} />)
+          )}
+        </div>
+      </section>
+
+      <section className="mt-12">
+        <h2 className="font-display text-sm font-semibold uppercase tracking-wide text-ink/60">
+          Commentaires en attente ({pending.length})
         </h2>
         <div className="mt-4 space-y-3">
           {pending.length === 0 ? (
@@ -43,7 +69,7 @@ export default async function DashboardPage() {
 
       <section className="mt-12">
         <h2 className="font-display text-sm font-semibold uppercase tracking-wide text-ink/60">
-          Publiés ({approved.length})
+          Commentaires publiés ({approved.length})
         </h2>
         <div className="mt-4 space-y-3">
           {approved.length === 0 ? (
