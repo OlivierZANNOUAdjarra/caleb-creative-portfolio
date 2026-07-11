@@ -41,6 +41,31 @@
   .text-balance {
     text-wrap: balance;
   }
+
+  /* Animation de brillance transparente (demandée par le client) sur boutons/badges */
+  .sheen-wrap {
+    position: relative;
+    overflow: hidden;
+  }
+  .sheen-wrap::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -60%;
+    width: 45%;
+    height: 100%;
+    background: linear-gradient(
+      115deg,
+      transparent,
+      rgba(255, 255, 255, 0.35),
+      transparent
+    );
+    pointer-events: none;
+  }
+  .sheen-wrap:hover::after,
+  .sheen-wrap.sheen-auto::after {
+    animation: sheen 2.6s ease-in-out infinite alternate;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
