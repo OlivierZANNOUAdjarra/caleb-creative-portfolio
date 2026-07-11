@@ -1,4 +1,5 @@
-import { getPublishedProjects, CATEGORY_OPTIONS } from '@/app/actions/projects';
+import { getPublishedProjects } from '@/app/actions/projects';
+import { CATEGORY_OPTIONS } from '@/lib/categories';
 import PortfolioGrid from '@/components/PortfolioGrid';
 import { ImageIcon } from 'lucide-react';
 
