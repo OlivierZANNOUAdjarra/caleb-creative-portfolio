@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, useTransition, useRef } from 'react';
-import { createProject, CATEGORY_OPTIONS } from '@/app/actions/projects';
+import { createProject } from '@/app/actions/projects';
+import { CATEGORY_OPTIONS } from '@/lib/categories';
 import { Upload, CheckCircle2 } from 'lucide-react';
 
 export default function DashboardProjectForm() {
