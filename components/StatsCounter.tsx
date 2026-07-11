@@ -8,7 +8,7 @@ import { useLanguage } from '@/lib/language-context';
 const STATS = [
   { value: 40, key: 'projects' as const, suffix: '+' },
   { value: 25, key: 'clients' as const, suffix: '+' },
-  { value: 9, key: 'tools' as const, suffix: '' },
+  { value: 30, key: 'tools' as const, suffix: '+' },
   { value: 2, key: 'experience' as const, suffix: '' },
 ];
 
