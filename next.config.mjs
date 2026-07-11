@@ -6,17 +6,14 @@ const nextConfig = {
         protocol: 'https',
         hostname: '*.public.blob.vercel-storage.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'cdn-icons-png.flaticon.com',
+      },
     ],
   },
   experimental: {
     typedRoutes: true,
-  },
-};
-const nextConfig = {
-  images: {
-    remotePatterns: [
-      { protocol: 'https', hostname: 'cdn-icons-png.flaticon.com' },
-    ],
   },
 };
 
