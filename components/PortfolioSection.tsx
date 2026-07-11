@@ -45,7 +45,7 @@ function TiltCard({
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{ transform, transition: transform ? 'none' : 'transform .4s cubic-bezier(.16,.8,.24,1)' }}
-      className="group relative aspect-[4/3] overflow-hidden rounded-xl2 border border-ink/10 text-left shadow-sm shadow-ink/5 will-change-transform dark:border-white/10"
+      className="group relative block aspect-[4/3] w-full overflow-hidden rounded-xl2 border border-ink/10 text-left shadow-sm shadow-ink/5 will-change-transform dark:border-white/10"
     >
       {children}
     </button>
@@ -104,6 +104,7 @@ export default function PortfolioSection() {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.3 }}
+              className="w-full"
             >
               <TiltCard onClick={() => setSelected(project)}>
                 <div
