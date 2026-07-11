@@ -9,6 +9,7 @@ import ContactSection from '@/components/ContactSection';
 import CommentsSection from '@/components/CommentsSection';
 import SectionDivider from '@/components/SectionDivider';
 import ParallaxWrapper from '@/components/ParallaxWrapper';
+import Footer from '@/components/Footer';
 
 export default function Home() {
   return (
@@ -43,6 +44,7 @@ export default function Home() {
       <ParallaxWrapper>
         <CommentsSection />
       </ParallaxWrapper>
+      <Footer />
     </main>
   );
 }
